@@ -33,7 +33,7 @@ body {
     z-index: 1;
 }
 
-/* first slide overlay */
+/* overlay */
 .overlay {
     position: absolute;
     width: 100%;
@@ -46,7 +46,7 @@ body {
     position: relative;
     text-align: center;
     color: white;
-    padding: 20px 20px 180px; /* more space for button */
+    padding: 20px;
     max-width: 92%;
     z-index: 2;
 }
@@ -59,28 +59,32 @@ h1 {
 
 /* signature */
 .signature {
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 18px;
-    opacity: 0.95;
 }
 
-/* dog button (moved higher globally) */
+/* dog button */
 .dog-btn {
     position: absolute;
-    bottom: 80px; /* moved up more */
+    bottom: 100px; /* moved up clearly */
     width: 65px;
     cursor: pointer;
     z-index: 3;
-    transition: transform 0.3s;
 }
 
-.dog-btn:hover {
-    transform: scale(1.15);
+/* FINAL SLIDE FIX (important) */
+#finalSlide {
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 60px;
+    padding-bottom: 120px;
 }
 
-/* extra spacing ONLY for final slide */
 #finalSlide .content {
-    padding-bottom: 220px; /* ensures no overlap */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 /* heart container */
@@ -92,7 +96,6 @@ h1 {
     pointer-events: none;
 }
 
-/* hearts */
 .heart {
     position: absolute;
     font-size: 22px;
@@ -111,64 +114,40 @@ h1 {
 <!-- Slide 1 -->
 <div class="slide active" style="background: linear-gradient(135deg,#ff758c,#ff7eb3);">
     <div class="overlay"></div>
-
     <div class="content">
         <h1>I have something for you 💖</h1>
     </div>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-         class="dog-btn"
-         onclick="nextSlide()">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="dog-btn" onclick="nextSlide()">
 </div>
 
 <!-- Slide 2 -->
 <div class="slide" style="background-image:url('photo1.jpg')">
-    <div class="content">
-        <h1>You make everything brighter 🌸</h1>
-    </div>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-         class="dog-btn"
-         onclick="nextSlide()">
+    <div class="content"><h1>You make everything brighter 🌸</h1></div>
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="dog-btn" onclick="nextSlide()">
 </div>
 
 <!-- Slide 3 -->
 <div class="slide" style="background-image:url('photo2.jpg')">
-    <div class="content">
-        <h1>Even when you're stressed, you shine ✨</h1>
-    </div>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-         class="dog-btn"
-         onclick="nextSlide()">
+    <div class="content"><h1>Even when you're stressed, you shine ✨</h1></div>
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="dog-btn" onclick="nextSlide()">
 </div>
 
 <!-- Slide 4 -->
 <div class="slide" style="background-image:url('photo3.jpg')">
     <div class="content">
-        <h1>
-        I see your effort, your strength, and your dedication…  
-        and it makes me admire you even more every single day 💖
-        </h1>
+        <h1>I see your effort, your strength, and your dedication…  
+        and it makes me admire you even more every single day 💖</h1>
     </div>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-         class="dog-btn"
-         onclick="nextSlide()">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="dog-btn" onclick="nextSlide()">
 </div>
 
 <!-- Slide 5 -->
 <div class="slide" style="background-image:url('photo4.jpg')">
     <div class="content">
-        <h1>
-        I am so proud of you, mera pyaara baccha 💗 <br><br>
-        You are the strongest, the most hardworking, and the most beautiful soul I know.
-        </h1>
+        <h1>I am so proud of you, mera pyaara baccha 💗 <br><br>
+        You are the strongest, the most hardworking, and the most beautiful soul I know.</h1>
     </div>
-
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-         class="dog-btn"
-         onclick="nextSlide()">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="dog-btn" onclick="nextSlide()">
 </div>
 
 <!-- Final Slide -->
@@ -189,9 +168,7 @@ h1 {
         <div class="signature">- Sona 🤍</div>
     </div>
 
-    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-         class="dog-btn"
-         onclick="rainHearts()">
+    <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" class="dog-btn" onclick="rainHearts()">
 </div>
 
 <script>
@@ -221,9 +198,7 @@ function rainHearts() {
 
         container.appendChild(heart);
 
-        setTimeout(() => {
-            heart.remove();
-        }, 4000);
+        setTimeout(() => heart.remove(), 4000);
     }
 }
 </script>
