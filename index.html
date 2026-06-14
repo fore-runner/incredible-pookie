@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Four Months, One Universe</title>
+  <style>
+    :root {
+      --bg-1: #fff8f6;
+      --bg-2: #ffeef3;
+      --bg-3: #f7f1ff;
+      --ink: #2d1f2f;
+      --muted: #6e5a70;
+      --rose: #ff6fa1;
+      --rose-deep: #ff4f87;
+      --lilac: #9f7aea;
+      --peach: #ffb38a;
+      --gold: #ffc857;
+      --card: rgba(255,255,255,0.72);
+      --line: rgba(86, 58, 91, 0.12);
+      --shadow: 0 20px 60px rgba(112, 69, 106, 0.16);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255,111,161,0.18), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(159,122,234,0.18), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(255,184,138,0.2), transparent 30%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body.night {
+      --bg-1: #140f1f;
+      --bg-2: #22152a;
+      --bg-3: #1d2238;
+      --ink: #fff7fb;
+      --muted: #d8c9da;
+      --card: rgba(33, 24, 46, 0.72);
+      --line: rgba(255,255,255,0.1);
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    .floating-sky,
+    .petal-layer,
+    .spark-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .floating-sky::before,
+    .floating-sky::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+      animation: drift 14s ease-in-out infinite;
+    }
+
+    .floating-sky::before {
+      width: 320px;
+      height: 320px;
+      background: rgba(255,111,161,0.24);
+      top: -80px;
+      left: -40px;
+    }
+
+    .floating-sky::after {
+      width: 360px;
+      height: 360px;
+      background: rgba(159,122,234,0.18);
+      bottom: -110px;
+      right: -70px;
+      animation-delay: -7s;
+    }
+
+    @keyframes drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(24px, 30px) scale(1.08); }
+    }
+
+    .shell {
+      position: relative;
+      z-index: 1;
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 48px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 26px;
+      position: sticky;
+      top: 10px;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: rgba(255,255,255,0.28);
+      border: 1px solid rgba(255,255,255,0.28);
+      box-shadow: var(--shadow);
+      border-radius: 999px;
+      padding: 12px 16px;
+    }
+
+    body.night .topbar {
+      background: rgba(20, 15, 31, 0.55);
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--rose), var(--lilac));
+      color: white;
+      box-shadow: 0 12px 24px rgba(255,111,161,0.25);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .ghost-btn,
+    .primary-btn,
+    .tiny-btn {
+      border: none;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .ghost-btn {
+      padding: 11px 16px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.58);
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    .ghost-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+    }
+
+    .hero-main {
+      padding: 34px;
+      position: relative;
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.58);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      width: fit-content;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero-title {
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin: 0;
+      max-width: 720px;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(90deg, var(--rose-deep), var(--lilac), var(--peach));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy {
+      margin: 18px 0 26px;
+      max-width: 700px;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 1.04rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .primary-btn {
+      padding: 14px 22px;
+      border-radius: 16px;
+      color: white;
+      background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+      box-shadow: 0 18px 36px rgba(255,111,161,0.24);
+      font-weight: 800;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero-note {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      margin-top: 26px;
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.55), rgba(255,255,255,0.28));
+      border: 1px solid var(--line);
+    }
+
+    .hero-note strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.04rem;
+    }
+
+    .hero-note p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .orbit {
+      position: absolute;
+      right: -40px;
+      bottom: -40px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px dashed rgba(255,111,161,0.28);
+      display: grid;
+      place-items: center;
+      opacity: 0.9;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(159,122,234,0.22);
+    }
+
+    .orbit::before {
+      inset: 24px;
+    }
+
+    .orbit::after {
+      inset: 52px;
+    }
+
+    .orbit-heart {
+      width: 78px;
+      height: 78px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--rose), var(--lilac));
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      animation: pulse 2.6s ease-in-out infinite;
+      box-shadow: 0 16px 28px rgba(159,122,234,0.22);
+    }
+
+    @keyframes pulse {
+      0%,100% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 24px;
+    }
+
+    .count-card,
+    .promise-card,
+    .message-card,
+    .map-card,
+    .memory-card,
+    .vault-card,
+    .footer-card,
+    .timeline-card,
+    .playlist-card {
+      padding: 26px;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+      font-weight: 800;
+      font-size: 0.76rem;
+      color: var(--rose-deep);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 1.45rem;
+    }
+
+    .subtle {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .count-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .count-box {
+      text-align: center;
+      padding: 15px 10px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.48);
+      border: 1px solid var(--line);
+    }
+
+    .count-box strong {
+      display: block;
+      font-size: 1.45rem;
+    }
+
+    .count-box span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .ring-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .ring-shell {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+
+    .ring {
+      --size: 120px;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      background: conic-gradient(var(--rose) 0 120deg, var(--lilac) 120deg 220deg, rgba(255,255,255,0.26) 220deg 360deg);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .ring::after {
+      content: "";
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.22);
+    }
+
+    .ring-value {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      font-size: 1.3rem;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.44);
+      border: 1px solid var(--line);
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-3px);
+    }
+
+    .timeline-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      background: linear-gradient(135deg, rgba(255,111,161,0.18), rgba(159,122,234,0.18));
+    }
+
+    .timeline-item h3,
+    .memory-tile h3,
+    .song h3 {
+      margin: 0 0 6px;
+      font-size: 1.04rem;
+    }
+
+    .timeline-item p,
+    .memory-tile p,
+    .song p,
+    .vault-output,
+    .message-output {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .memory-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .memory-tile {
+      min-height: 170px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.48), rgba(255,255,255,0.28));
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: 0.25s ease;
+    }
+
+    .memory-tile:hover {
+      transform: translateY(-4px) rotate(-0.4deg);
+    }
+
+    .memory-tag {
+      display: inline-flex;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .memory-emoji {
+      position: absolute;
+      right: 14px;
+      bottom: 8px;
+      font-size: 34px;
+      opacity: 0.9;
+    }
+
+    .map-rows {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .map-line {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .map-line:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .map-label {
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .mini-input-wrap {
+      display: flex;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .mini-input {
+      flex: 1;
+      min-width: 180px;
+      padding: 13px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.58);
+      color: var(--ink);
+      outline: none;
+    }
+
+    .tiny-btn {
+      padding: 13px 16px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--lilac), var(--rose));
+      color: white;
+      font-weight: 800;
+    }
+
+    .message-output,
+    .vault-output {
+      margin-top: 16px;
+      min-height: 62px;
+      padding: 15px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.42);
+      border: 1px dashed var(--line);
+    }
+
+    .playlist-stack {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .song {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.44);
+      border: 1px solid var(--line);
+      cursor: pointer;
+      transition: 0.24s ease;
+    }
+
+    .song:hover {
+      transform: translateX(4px);
+    }
+
+    .song-no {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(255,111,161,0.18), rgba(159,122,234,0.18));
+      font-weight: 900;
+    }
+
+    .song-emoji {
+      font-size: 24px;
+    }
+
+    .footer-card {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .footer-card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(32px, 5vw, 56px);
+      letter-spacing: -1.2px;
+    }
+
+    .footer-card p {
+      max-width: 760px;
+      margin: 0 auto 20px;
+      color: var(--muted);
+      line-height: 1.85;
+    }
+
+    .signature {
+      font-weight: 800;
+      font-size: 1.04rem;
+      color: var(--rose-deep);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(27, 18, 35, 0.45);
+      backdrop-filter: blur(12px);
+      display: none;
+      place-items: center;
+      padding: 18px;
+      z-index: 30;
+    }
+
+    .modal.show {
+      display: grid;
+    }
+
+    .modal-card {
+      width: min(720px, 100%);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 28px;
+      padding: 26px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.58);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .modal-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.6rem;
+    }
+
+    .modal-text {
+      white-space: pre-wrap;
+      line-height: 1.85;
+      color: var(--muted);
+      min-height: 150px;
+    }
+
+    .toast {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 40;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(34, 21, 42, 0.92);
+      color: white;
+      box-shadow: 0 18px 32px rgba(0,0,0,0.24);
+      opacity: 0;
+      transform: translateY(10px);
+      pointer-events: none;
+      transition: 0.25s ease;
+      max-width: 320px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .petal {
+      position: fixed;
+      z-index: 20;
+      pointer-events: none;
+      font-size: 18px;
+      animation: petalFall linear forwards;
+      opacity: 0.9;
+    }
+
+    @keyframes petalFall {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      100% { transform: translateY(110vh) translateX(30px) rotate(280deg); opacity: 0; }
+    }
+
+    .spark {
+      position: fixed;
+      z-index: 25;
+      pointer-events: none;
+      animation: sparkleUp 1s ease forwards;
+      font-size: 16px;
+    }
+
+    @keyframes sparkleUp {
+      from { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+      to { transform: translate(-50%, -120%) scale(1.3); opacity: 0; }
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main {
+        min-height: auto;
+      }
+
+      .orbit {
+        position: relative;
+        right: auto;
+        bottom: auto;
+        margin-top: 22px;
+        width: 220px;
+        height: 220px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .shell {
+        width: min(100% - 18px, 1180px);
+        padding-top: 14px;
+      }
+
+      .topbar {
+        border-radius: 24px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-main,
+      .count-card,
+      .promise-card,
+      .message-card,
+      .map-card,
+      .memory-card,
+      .vault-card,
+      .footer-card,
+      .timeline-card,
+      .playlist-card,
+      .modal-card {
+        padding: 20px;
+      }
+
+      .count-grid,
+      .memory-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .song {
+        grid-template-columns: auto 1fr;
+      }
+
+      .song-emoji {
+        display: none;
+      }
+
+      .map-line {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-sky"></div>
+  <div class="petal-layer" id="petalLayer"></div>
+  <div class="spark-layer" id="sparkLayer"></div>
+
+  <div class="shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">❤</div>
+        <div>
+          <div>Our Little Universe</div>
+          <div style="font-size:0.85rem;color:var(--muted);font-weight:600;">Happy 4 Months Together ❤️</div>
+        </div>
+      </div>
+      <div class="nav-actions">
+        <button class="ghost-btn" id="themeToggle">🌙 Toggle Mood</button>
+        <button class="ghost-btn" id="petalBtn">🌸 Drop Petals</button>
+        <button class="ghost-btn" id="roseThemeBtn">🌹 Rose</button>
+        <button class="ghost-btn" id="oceanThemeBtn">🌊 Ocean</button>
+        <button class="ghost-btn" id="sunsetThemeBtn">🌅 Sunset</button>
+        <button class="ghost-btn" id="lavenderThemeBtn">💜 Lavender</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="panel hero-main">
+        <div>
+          <div class="badge">💌 Today is ours again</div>
+          <h1 class="hero-title">
+            Four months,<br>
+            <span class="highlight">one very beautiful story.</span>
+          </h1>
+          <p class="hero-copy" id="heroCopy"></p>
+
+          <div class="hero-actions">
+            <button class="primary-btn" id="openLetterBtn">Open Main Letter</button>
+            <button class="ghost-btn" id="playStoryBtn">Read Our Story</button>
+            <button class="ghost-btn" id="complimentBtn">Random Compliment</button>
+          </div>
+        </div>
+
+        <div class="hero-note">
+          <div>
+            <strong id="noteTitle">A note for today</strong>
+            <p id="noteText"></p>
+          </div>
+          <div style="font-size:2rem;align-self:center;">✨</div>
+        </div>
+
+        <div class="orbit">
+          <div class="orbit-heart">💞</div>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="panel count-card">
+          <div class="eyebrow">Our Journey So Far</div>
+          <h2 class="section-title">4 Months Together ❤️</h2>
+          <p class="subtle">Every second with you has been worth celebrating.</p>
+          <div class="count-grid">
+            <div class="count-box"><strong id="days">00</strong><span>Days Together</span></div>
+            <div class="count-box"><strong id="hours">00</strong><span>Hours</span></div>
+            <div class="count-box"><strong id="minutes">00</strong><span>Minutes</span></div>
+            <div class="count-box"><strong id="seconds">00</strong><span>Seconds</span></div>
+          </div>
+        </div>
+
+        <div class="panel promise-card">
+          <div class="eyebrow">What this month feels like</div>
+          <h2 class="section-title">Still soft. Still exciting. Still you.</h2>
+          <div class="ring-wrap">
+            <div class="ring-shell">
+              <div class="ring"></div>
+              <div class="ring-value" id="loveMeter">4/4</div>
+            </div>
+            <p class="subtle">Month four feels like comfort, chaos, laughter, calm, and that sweet little feeling that keeps saying: yes, this is my person.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div class="panel timeline-card">
+        <div class="eyebrow">Our timeline</div>
+        <h2 class="section-title">Four chapters so far</h2>
+        <p class="subtle">Tap any chapter and it opens like a tiny memory capsule.</p>
+        <div class="timeline" id="timeline"></div>
+      </div>
+
+      <div class="panel map-card">
+        <div class="eyebrow">Coordinates of us</div>
+        <h2 class="section-title">A map made of feelings</h2>
+        <p class="subtle">Not a real map. A better one.</p>
+        <div class="map-rows" id="mapRows"></div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div class="panel memory-card">
+        <div class="eyebrow">Pocket memories</div>
+        <h2 class="section-title">Tiny things that feel huge</h2>
+        <p class="subtle">Completely different from the old website — now it feels like a soft scrapbook instead of a streaming page.</p>
+        <div class="memory-grid" id="memoryGrid"></div>
+      </div>
+
+      <div class="panel message-card">
+        <div class="eyebrow">For her, instantly</div>
+        <h2 class="section-title">Generate a sweet line</h2>
+        <p class="subtle">Type a mood and I’ll turn it into a cute little line for your girlfriend.</p>
+        <div class="mini-input-wrap">
+          <input class="mini-input" id="moodInput" placeholder="Try: cute, clingy, romantic, thankful" />
+          <button class="tiny-btn" id="generateMsgBtn">Generate</button>
+        </div>
+        <div class="message-output" id="messageOutput">Your custom message will appear here.</div>
+      </div>
+    </section>
+
+    <section class="section-grid">
+      <div class="panel vault-card">
+        <div class="eyebrow">Secret vault</div>
+        <h2 class="section-title">Unlock the hidden promise</h2>
+        <p class="subtle">Hint: type something symbolic. You can keep 143, love, us, forever, or 040.</p>
+        <div class="mini-input-wrap">
+          <input class="mini-input" id="vaultInput" placeholder="Enter secret code" />
+          <button class="tiny-btn" id="unlockVaultBtn">Unlock</button>
+        </div>
+        <div class="vault-output" id="vaultOutput">Locked for now.</div>
+      </div>
+
+      <div class="panel playlist-card">
+        <div class="eyebrow">Moodboard playlist</div>
+        <h2 class="section-title">Today's emotional soundtrack</h2>
+        <p class="subtle">These are not real audio players — they are little themed notes that open into sweet descriptions.</p>
+        <div class="playlist-stack" id="playlistStack"></div>
+      </div>
+    </section>
+
+    <footer class="panel footer-card">
+      <div class="eyebrow">End note</div>
+      <h2 id="footerHeading"></h2>
+      <p id="footerCopy"></p>
+      <button class="primary-btn" id="finalPromiseBtn">Final Promise</button>
+      <div class="signature" id="signatureLine"></div>
+    </footer>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <button class="close-btn" id="closeModal">×</button>
+      <div class="eyebrow">Opened just for her</div>
+      <h3 id="modalTitle">Message</h3>
+      <div class="modal-text" id="modalText"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const config = {
+      yourName: "Ayush",
+      partnerName: "Shivangi",
+      relationshipStart: new Date(2026, 1, 15, 0, 0, 0),
+      anniversaryDate: new Date(2026, 5, 15, 0, 0, 0),
+      heroCopy: "Today marks four months of us, and I wanted something that feels completely new — softer, warmer, more personal, and nothing like the old design. So this page is built like a little universe: part letter, part scrapbook, part secret garden, all for you.",
+      noteTitle: "For the girl I choose again today",
+      noteText: "If I could wrap the last four months into one feeling, it would probably feel like warmth in my chest and a smile I can't hide.",
+      storyText: `Four months ago, something quietly changed.\n\nA person became my comfort.\nA name became my favorite notification.\nA conversation became a place I wanted to stay.\nAnd little by little, you became part of how I think about happiness.\n\nSo today isn't just a date. It's proof that even four months can hold a whole universe when the person is right.`,
+      mainLetter: `Hi Shivangi,\n\nHappy 4th month anniversary, my love.\n\nI wanted to make you something that feels fresh and different, because what we have deserves effort, softness, and something made only for you. These four months have given me so many reasons to smile, to feel lucky, and to love you even more deeply.\n\nThank you for your care, your presence, your patience, your beauty, your laughter, and the way you make ordinary moments feel special. I genuinely feel proud of us.\n\nNo matter how sweet this page looks, it still can't fully show how much you mean to me. But I hope it makes you smile.\n\nHappy four months to us.\nI love you so much.`,
+      finalPromise: `My promise for month four and every month after this: I will keep choosing us with intention, softness, honesty, and love. I will keep learning you better, loving you better, and finding new little ways to make you feel special.`,
+      compliments: [
+        "You have the kind of smile that can repair an entire day.",
+        "You make affection feel effortless and home feel portable.",
+        "You're the prettiest peace I know.",
+        "Even your simplest messages have main-character energy.",
+        "You are soft, strong, lovely, and somehow still underrated."
+      ],
+      timeline: [
+        { icon: "🌱", title: "Month One", text: "Everything felt new, bright, and impossible not to think about." },
+        { icon: "🫶", title: "Month Two", text: "Comfort started growing beside the excitement, and that made everything sweeter." },
+        { icon: "💫", title: "Month Three", text: "By now, missing you, smiling at texts, and replaying moments became normal." },
+        { icon: "🌸", title: "Month Four", text: "Now today has arrived, and somehow I still feel lucky in all the same fresh ways." }
+      ],
+      map: [
+        { label: "North", text: "the way you guide my mood upward with one message" },
+        { label: "South", text: "the calm you bring when everything else feels loud" },
+        { label: "East", text: "the excitement of every new memory waiting for us" },
+        { label: "West", text: "the comfort of having someone who already feels like home" }
+      ],
+      memories: [
+        { tag: "Saved", title: "Your smile", text: "Still one of my favorite places to mentally live in.", emoji: "😊" },
+        { tag: "Pinned", title: "Your texts", text: "Tiny notifications, massive emotional impact.", emoji: "📱" },
+        { tag: "Rare", title: "Your softness", text: "The kind that makes love feel safe and beautiful at the same time.", emoji: "☁️" },
+        { tag: "Favorite", title: "Your existence", text: "Honestly the best plot improvement my life ever got.", emoji: "💗" }
+      ],
+      playlist: [
+        { no: "01", title: "Soft Eyes, Full Heart", text: "A track for looking at her like she hung the moon.", emoji: "🌙" },
+        { no: "02", title: "Typing... Thinking of You", text: "For those moments when even waiting for her reply feels cute.", emoji: "⌨️" },
+        { no: "03", title: "Pink Sky Promise", text: "The kind of song that sounds like future plans and forehead kisses.", emoji: "🌇" },
+        { no: "04", title: "Month Four Bloom", text: "Warm, happy, slightly dramatic, and impossible not to replay.", emoji: "🌸" }
+      ],
+      codeResponses: {
+        "143": "143 received. Hidden promise unlocked: I still get excited about you in the softest, sweetest way.",
+        "love": "Access granted. Secret note: loving you feels easy, natural, and somehow still magical.",
+        "us": "Vault opened. Final truth: us is my favorite answer to almost everything.",
+        "forever": "Big word. Pretty one too. And yes, my heart smiled at it instantly.",
+        "040": "040 unlocked. Four months down, and my heart is still very obviously yours."
+      }
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const modal = $("modal");
+    const modalTitle = $("modalTitle");
+    const modalText = $("modalText");
+    const toast = $("toast");
+    const petalLayer = $("petalLayer");
+    const sparkLayer = $("sparkLayer");
+
+    function setStaticText() {
+      $("heroCopy").textContent = config.heroCopy;
+      $("noteTitle").textContent = config.noteTitle;
+      $("noteText").textContent = config.noteText;
+      $("footerHeading").textContent = `Happy 4th month anniversary, ${config.partnerName}.`;
+      $("footerCopy").textContent = `These four months with you have been soft, beautiful, funny, comforting, and unforgettable. Today is our 4th month, and this page is my small way of saying: I still choose you with a full heart.`;
+      $("signatureLine").textContent = `Made with love by ${config.yourName} for ${config.partnerName}`;
+    }
+
+    function renderTimeline() {
+      const wrap = $("timeline");
+      wrap.innerHTML = "";
+      config.timeline.forEach(item => {
+        const el = document.createElement("article");
+        el.className = "timeline-item";
+        el.innerHTML = `
+          <div class="timeline-icon">${item.icon}</div>
+          <div>
+            <h3>${item.title}</h3>
+            <p>${item.text}</p>
+          </div>
+        `;
+        el.addEventListener("click", () => openModal(item.title, item.text, true));
+        wrap.appendChild(el);
+      });
+    }
+
+    function renderMap() {
+      const wrap = $("mapRows");
+      wrap.innerHTML = "";
+      config.map.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "map-line";
+        row.innerHTML = `<div class="map-label">${item.label}</div><div class="subtle">${item.text}</div>`;
+        wrap.appendChild(row);
+      });
+    }
+
+    function renderMemories() {
+      const wrap = $("memoryGrid");
+      wrap.innerHTML = "";
+      config.memories.forEach(item => {
+        const tile = document.createElement("article");
+        tile.className = "memory-tile";
+        tile.innerHTML = `
+          <div class="memory-tag">${item.tag}</div>
+          <h3>${item.title}</h3>
+          <p>${item.text}</p>
+          <div class="memory-emoji">${item.emoji}</div>
+        `;
+        tile.addEventListener("click", () => openModal(item.title, `${item.text}\n\nSmall detail, huge effect — just like almost everything about her.`, true));
+        wrap.appendChild(tile);
+      });
+    }
+
+    function renderPlaylist() {
+      const wrap = $("playlistStack");
+      wrap.innerHTML = "";
+      config.playlist.forEach(song => {
+        const row = document.createElement("article");
+        row.className = "song";
+        row.innerHTML = `
+          <div class="song-no">${song.no}</div>
+          <div>
+            <h3>${song.title}</h3>
+            <p>${song.text}</p>
+          </div>
+          <div class="song-emoji">${song.emoji}</div>
+        `;
+        row.addEventListener("click", () => openModal(song.title, song.text, true));
+        wrap.appendChild(row);
+      });
+    }
+
+    let typeTimer;
+    function openModal(title, text, animate = false) {
+      modal.classList.add("show");
+      modalTitle.textContent = title;
+      modalText.textContent = "";
+      clearInterval(typeTimer);
+      if (!animate) {
+        modalText.textContent = text;
+        return;
+      }
+      let i = 0;
+      typeTimer = setInterval(() => {
+        modalText.textContent += text[i] || "";
+        i += 1;
+        if (i >= text.length) clearInterval(typeTimer);
+      }, 16);
+    }
+
+    function closeModal() {
+      modal.classList.remove("show");
+      clearInterval(typeTimer);
+    }
+
+    $("closeModal").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    let toastTimer;
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = now - config.relationshipStart;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      $("days").textContent = days;
+      $("hours").textContent = String(hours).padStart(2, "0");
+      $("minutes").textContent = String(minutes).padStart(2, "0");
+      $("seconds").textContent = String(seconds).padStart(2, "0");
+    }
+
+    function dropPetals(count = 22) {
+      const symbols = ["🌸", "✨", "💮", "💗"];
+      for (let i = 0; i < count; i++) {
+        setTimeout(() => {
+          const petal = document.createElement("div");
+          petal.className = "petal";
+          petal.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          petal.style.left = Math.random() * window.innerWidth + "px";
+          petal.style.animationDuration = (3 + Math.random() * 3) + "s";
+          petal.style.fontSize = (16 + Math.random() * 16) + "px";
+          petalLayer.appendChild(petal);
+          setTimeout(() => petal.remove(), 6500);
+        }, i * 90);
+      }
+    }
+
+    document.addEventListener("mousemove", (e) => {
+      if (Math.random() > 0.92) {
+        const spark = document.createElement("div");
+        spark.className = "spark";
+        spark.textContent = ["✦", "♥", "✧"][Math.floor(Math.random() * 3)];
+        spark.style.left = e.clientX + "px";
+        spark.style.top = e.clientY + "px";
+        spark.style.color = ["#ff6fa1", "#9f7aea", "#ffc857", "#ffffff"][Math.floor(Math.random() * 4)];
+        sparkLayer.appendChild(spark);
+        setTimeout(() => spark.remove(), 1000);
+      }
+    });
+
+    $("themeToggle").addEventListener("click", () => {
+      document.body.classList.toggle("night");
+      showToast(document.body.classList.contains("night") ? "Night mood on 🌙" : "Daydream mood on ☀️");
+    });
+
+    $("petalBtn").addEventListener("click", () => {
+      dropPetals(30);
+      showToast("Petals incoming 🌸");
+    });
+
+    $("openLetterBtn").addEventListener("click", () => {
+      openModal("Main Letter", config.mainLetter, true);
+      dropPetals(20);
+    });
+
+    $("playStoryBtn").addEventListener("click", () => {
+      openModal("Our Story So Far", config.storyText, true);
+    });
+
+    $("complimentBtn").addEventListener("click", () => {
+      const line = config.compliments[Math.floor(Math.random() * config.compliments.length)];
+      openModal("Random Compliment", `${config.partnerName}, ${line}`, true);
+      showToast("A compliment has been selected 💗");
+    });
+
+    $("generateMsgBtn").addEventListener("click", () => {
+      const mood = $("moodInput").value.trim().toLowerCase();
+      let line = "You make even the quietest days feel loved.";
+      if (mood.includes("cute")) line = `${config.partnerName}, you are painfully cute and I fully blame you for most of my smiling.`;
+      else if (mood.includes("clingy")) line = `I miss you a little too professionally. I deserve a hug and probably your attention.`;
+      else if (mood.includes("romantic")) line = `If love had a favorite face, I think my heart would point to yours without thinking twice.`;
+      else if (mood.includes("thank")) line = `Thank you for being gentle with my heart and beautiful in all the ways that matter.`;
+      else if (mood) line = `${config.partnerName}, if ${mood} had a human version, my heart would still somehow choose you first.`;
+      $("messageOutput").textContent = line;
+      showToast("Custom line ready ✨");
+    });
+
+    $("unlockVaultBtn").addEventListener("click", () => {
+      const code = $("vaultInput").value.trim().toLowerCase();
+      if (config.codeResponses[code]) {
+        $("vaultOutput").textContent = config.codeResponses[code];
+        openModal("Hidden Promise", `${config.codeResponses[code]}\n\nAnd one more thing: happy 4th month anniversary, my love.`, true);
+        dropPetals(24);
+      } else {
+        $("vaultOutput").textContent = "Not that one... but the effort is still adorable. Try 143, love, us, forever, or 040.";
+      }
+    });
+
+    $("finalPromiseBtn").addEventListener("click", () => {
+      openModal("Final Promise", config.finalPromise, true);
+      dropPetals(36);
+    });
+
+
+    function applyTheme(type) {
+      const root = document.documentElement;
+
+      const themes = {
+        rose: ["#ff6fa1","#ff4f87","#d16ba5","#ffb38a"],
+        ocean: ["#3aa6ff","#0066cc","#42c2ff","#8be9fd"],
+        sunset: ["#ff7b54","#ff5e57","#ffb26b","#ffd56f"],
+        lavender: ["#9f7aea","#7c5ce0","#b794f4","#d6bcfa"]
+      };
+
+      const t = themes[type];
+      if(!t) return;
+
+      root.style.setProperty('--rose', t[0]);
+      root.style.setProperty('--rose-deep', t[1]);
+      root.style.setProperty('--lilac', t[2]);
+      root.style.setProperty('--peach', t[3]);
+
+      showToast(type.charAt(0).toUpperCase() + type.slice(1) + ' theme ✨');
+    }
+
+    $("roseThemeBtn").addEventListener("click", () => applyTheme("rose"));
+    $("oceanThemeBtn").addEventListener("click", () => applyTheme("ocean"));
+    $("sunsetThemeBtn").addEventListener("click", () => applyTheme("sunset"));
+    $("lavenderThemeBtn").addEventListener("click", () => applyTheme("lavender"));
+
+
+    setStaticText();
+    renderTimeline();
+    renderMap();
+    renderMemories();
+    renderPlaylist();
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
