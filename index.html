@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>7 Months of Us, Shona ❤️</title>
+<style>
+  :root{
+    --bg-1:#fff5f7;
+    --bg-2:#ffe4eb;
+    --bg-3:#ffd4e5;
+    --ink:#4a1f2e;
+    --muted:#a67b8a;
+    --rose:#e84c6f;
+    --rose-deep:#c9274f;
+    --pink:#f472b6;
+    --light-pink:#fbcfe8;
+    --gold:#f5a962;
+    --cream:#fffcfd;
+    --card:rgba(255,255,255,0.75);
+    --line:rgba(232,76,111,0.15);
+    --shadow:0 22px 55px rgba(232,76,111,0.18);
+    --radius-xl:30px;
+    --radius-lg:20px;
+    --radius-md:14px;
+    --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+    --script:'Great Vibes', cursive;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Cormorant Garamond','Georgia',serif;
+    font-size:1.14rem;
+    color:var(--ink);
+    background:
+      radial-gradient(circle at 15% 10%, rgba(232,76,111,0.18), transparent 35%),
+      radial-gradient(circle at 85% 5%, rgba(244,114,182,0.15), transparent 30%),
+      radial-gradient(circle at 50% 95%, rgba(245,169,98,0.12), transparent 40%),
+      linear-gradient(160deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+    min-height:100vh;
+    overflow-x:hidden;
+  }
+  body.night{
+    --bg-1:#2a1420;
+    --bg-2:#3a1830;
+    --bg-3:#481b40;
+    --ink:#fde4ed;
+    --muted:#d9a8bd;
+    --card:rgba(42,20,32,0.8);
+    --line:rgba(255,255,255,0.12);
+    --shadow:0 22px 55px rgba(0,0,0,0.5);
+    --cream:#3a1830;
+  }
+  .petal-layer,.spark-layer{position:fixed;inset:0;pointer-events:none;z-index:2;}
+  .bloom{position:fixed;border-radius:50%;filter:blur(80px);opacity:0.5;z-index:0;pointer-events:none;animation:drift 20s ease-in-out infinite;}
+  .bloom.one{width:400px;height:400px;background:rgba(232,76,111,0.25);top:-100px;left:-80px;}
+  .bloom.two{width:420px;height:420px;background:rgba(244,114,182,0.18);bottom:-140px;right:-100px;animation-delay:-9s;}
+  @keyframes drift{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(28px,32px) scale(1.08);}}
+
+  .shell{position:relative;z-index:1;width:min(1100px,calc(100% - 32px));margin:0 auto;padding:20px 0 60px;}
+
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    margin-bottom:28px;position:sticky;top:10px;z-index:20;
+    backdrop-filter:blur(16px);
+    background:rgba(255,255,255,0.45);
+    border:1px solid rgba(255,255,255,0.4);
+    box-shadow:var(--shadow);
+    border-radius:999px;padding:10px 14px;
+  }
+  body.night .topbar{background:rgba(42,20,32,0.65);border-color:rgba(255,255,255,0.1);}
+  .brand{display:flex;align-items:center;gap:10px;font-family:var(--serif);font-weight:700;font-size:1.02rem;letter-spacing:0.3px;}
+  .brand-mark{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--rose),var(--pink));color:white;font-size:1.1rem;box-shadow:0 10px 20px rgba(232,76,111,0.35);}
+  .nav-actions{display:flex;gap:8px;flex-wrap:wrap;}
+  button{font-family:inherit;}
+  .ghost-btn,.primary-btn{border:none;cursor:pointer;transition:.25s ease;font-size:0.93rem;}
+  .ghost-btn{padding:9px 14px;border-radius:999px;background:rgba(255,255,255,0.65);color:var(--ink);border:1px solid var(--line);}
+  .ghost-btn:hover{transform:translateY(-2px);box-shadow:0 8px 16px rgba(232,76,111,0.2);}
+  body.night .ghost-btn{background:rgba(255,255,255,0.1);color:var(--ink);}
+
+  section{margin-bottom:26px;}
+  .panel{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);backdrop-filter:blur(18px);border-radius:var(--radius-xl);overflow:hidden;}
+
+  /* HERO */
+  .hero{padding:54px 44px 42px;text-align:center;position:relative;}
+  .eyebrow{display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,0.65);border:1px solid var(--line);color:var(--rose-deep);font-weight:600;letter-spacing:1.5px;text-transform:uppercase;font-size:0.72rem;margin-bottom:22px;}
+  body.night .eyebrow{color:#ffc4d1;background:rgba(255,255,255,0.1);}
+  .hero h1{font-family:var(--serif);font-size:clamp(36px,6vw,64px);line-height:1.08;letter-spacing:-1px;margin:0 auto 6px;max-width:820px;font-weight:700;}
+  .hero h1 .shona{font-family:var(--script);font-size:1.32em;font-weight:400;background:linear-gradient(90deg,var(--rose-deep),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;padding:0 4px;}
+  .hero-copy{margin:22px auto 8px;max-width:640px;color:var(--muted);line-height:1.85;font-size:1.13rem;}
+  .countdown{display:flex;justify-content:center;gap:14px;margin:36px 0 12px;flex-wrap:wrap;}
+  .count-box{background:rgba(255,255,255,0.7);border:2px solid var(--line);border-radius:var(--radius-md);padding:18px 22px;min-width:90px;box-shadow:0 12px 28px rgba(232,76,111,0.12);transition:transform 0.3s ease;}
+  .count-box:hover{transform:translateY(-4px);}
+  body.night .count-box{background:rgba(255,255,255,0.08);}
+  .count-box .num{font-family:var(--serif);font-size:2.1rem;font-weight:700;background:linear-gradient(135deg,var(--rose),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .count-box .label{font-size:0.68rem;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted);margin-top:4px;font-weight:500;}
+  .hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px;}
+  .primary-btn{padding:14px 24px;border-radius:16px;color:white;background:linear-gradient(135deg,var(--rose),var(--rose-deep));box-shadow:0 16px 32px rgba(232,76,111,0.32);font-weight:700;font-size:0.98rem;}
+  .primary-btn:hover{transform:translateY(-2px);box-shadow:0 20px 40px rgba(232,76,111,0.4);}
+
+  /* DUO PHOTOS */
+  .duo{padding:44px;}
+  .duo-heading{text-align:center;margin-bottom:28px;}
+  .duo-heading h2{font-family:var(--serif);font-size:clamp(26px,4vw,38px);margin:0 0 8px;}
+  .duo-heading p{color:var(--muted);margin:0;font-size:1.03rem;}
+  .duo-frames{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;}
+  .duo-photo{width:240px;height:320px;border-radius:22px;overflow:hidden;box-shadow:0 20px 40px rgba(232,76,111,0.22);border:6px solid var(--cream);transform:rotate(-4deg);position:relative;transition:transform .3s ease;background:linear-gradient(135deg,var(--light-pink),var(--pink));}
+  .duo-photo.right{transform:rotate(4deg);margin-left:-30px;}
+  .duo-photo:hover{transform:rotate(0deg) scale(1.04);z-index:5;}
+  .duo-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+  .duo-heart{width:54px;height:54px;display:grid;place-items:center;margin:0 -6px;z-index:3;font-size:1.8rem;filter:drop-shadow(0 6px 14px rgba(232,76,111,0.5));animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+  .duo-caption{text-align:center;margin-top:22px;color:var(--muted);font-style:italic;}
+
+  /* STORY */
+  .story{padding:44px;}
+  .story h2{font-family:var(--serif);font-size:clamp(24px,4vw,34px);margin:0 0 18px;}
+  .story p{color:var(--muted);line-height:1.9;font-size:1.08rem;max-width:760px;margin:14px 0;}
+  .story p.highlight{background:linear-gradient(120deg,rgba(244,114,182,0.15),rgba(232,76,111,0.1));padding:20px;border-left:4px solid var(--rose);border-radius:12px;margin:20px 0;font-style:italic;color:var(--ink);}
+
+  /* TIMELINE */
+  .section-heading{text-align:center;margin-bottom:28px;padding:0 20px;}
+  .section-heading h2{font-family:var(--serif);font-size:clamp(26px,4vw,38px);margin:0 0 8px;}
+  .section-heading p{color:var(--muted);margin:0;}
+  .timeline{padding:44px;display:flex;flex-direction:column;gap:4px;}
+  .timeline-item{display:flex;gap:18px;padding:20px 10px;border-bottom:1px solid var(--line);cursor:pointer;transition:.2s ease;}
+  .timeline-item:last-child{border-bottom:none;}
+  .timeline-item:hover{background:rgba(232,76,111,0.08);border-radius:14px;}
+  .timeline-icon{width:46px;height:46px;flex:none;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--pink));display:grid;place-items:center;font-size:1.25rem;box-shadow:0 10px 20px rgba(232,76,111,0.28);}
+  .timeline-item h3{margin:0 0 6px;font-family:var(--serif);font-size:1.15rem;}
+  .timeline-item p{margin:0;color:var(--muted);line-height:1.7;font-size:1rem;}
+
+  /* LETTERS */
+  .letters{padding:44px;text-align:center;}
+  .letter-box{background:rgba(255,255,255,0.5);border:2px solid var(--line);border-radius:var(--radius-md);padding:24px;margin:16px auto;max-width:650px;cursor:pointer;transition:.3s ease;}
+  .letter-box:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(232,76,111,0.15);}
+  .letter-box h3{font-family:var(--serif);font-size:1.3rem;margin:0 0 8px;color:var(--rose-deep);}
+  .letter-box p{color:var(--muted);margin:0;font-size:0.95rem;}
+
+  /* MODAL */
+  #modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);backdrop-filter:blur(4px);z-index:100;grid-place-items:center;animation:fadeIn .3s ease;}
+  #modal.show{display:grid;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  .modal-content{background:var(--cream);border:2px solid var(--line);border-radius:var(--radius-lg);padding:40px;max-width:620px;max-height:85vh;overflow-y:auto;box-shadow:0 30px 60px rgba(0,0,0,0.35);animation:slideUp .3s ease;}
+  @keyframes slideUp{from{transform:translateY(40px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+  #modalTitle{font-family:var(--serif);font-size:1.8rem;margin:0 0 14px;background:linear-gradient(90deg,var(--rose-deep),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  #modalText{color:var(--muted);line-height:2;font-size:1.05rem;text-align:left;white-space:pre-wrap;margin-bottom:20px;}
+  #closeModal{position:absolute;top:16px;right:16px;width:36px;height:36px;border:none;background:rgba(232,76,111,0.1);border-radius:50%;font-size:1.5rem;cursor:pointer;transition:.2s ease;}
+  #closeModal:hover{background:rgba(232,76,111,0.2);}
+
+  /* TOAST */
+  #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--rose);color:white;padding:14px 22px;border-radius:999px;box-shadow:0 10px 30px rgba(232,76,111,0.4);opacity:0;transition:.3s ease;z-index:200;pointer-events:none;}
+  #toast.show{opacity:1;}
+
+  /* PETAL EFFECTS */
+  .petal{position:fixed;animation:fall linear forwards;}
+  @keyframes fall{
+    to{
+      transform:translateY(100vh) rotate(720deg);
+      opacity:0;
+    }
+  }
+  .spark{position:fixed;font-size:0.9rem;pointer-events:none;animation:spark-anim .8s ease-out forwards;}
+  @keyframes spark-anim{
+    to{
+      transform:translate(var(--tx), var(--ty)) scale(0);
+      opacity:0;
+    }
+  }
+
+  @media (max-width:640px){
+    .hero{padding:36px 24px 28px;}
+    .countdown{gap:10px;}
+    .count-box{min-width:75px;padding:14px 16px;}
+    .count-box .num{font-size:1.6rem;}
+    .duo-photo{width:180px;height:240px;}
+  }
+</style>
+<div class="bloom one"></div>
+<div class="bloom two"></div>
+<div class="petal-layer" id="petalLayer"></div>
+<div class="spark-layer" id="sparkLayer"></div>
+
+<div class="shell">
+  <nav class="topbar">
+    <div class="brand">
+      <div class="brand-mark">💕</div>
+      <span>7 Months of Us</span>
+    </div>
+    <div class="nav-actions">
+      <button class="ghost-btn" id="themeToggle">🌙</button>
+      <button class="ghost-btn" id="petalBtn">✨</button>
+    </div>
+  </nav>
+
+  <section class="panel hero">
+    <div class="eyebrow">🎉 7 Month Anniversary 🎉</div>
+    <h1>Seven Months, <span class="shona">Shona</span></h1>
+    <p class="hero-copy">Seven months since I got on one knee — and every single day since has been the best decision I've ever made.</p>
+    
+    <div class="countdown">
+      <div class="count-box">
+        <div class="num" id="days">0</div>
+        <div class="label">Days</div>
+      </div>
+      <div class="count-box">
+        <div class="num" id="hours">00</div>
+        <div class="label">Hours</div>
+      </div>
+      <div class="count-box">
+        <div class="num" id="minutes">00</div>
+        <div class="label">Minutes</div>
+      </div>
+      <div class="count-box">
+        <div class="num" id="seconds">00</div>
+        <div class="label">Seconds</div>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:0.95rem;margin-top:16px;">...and counting 💗</p>
+
+    <div class="hero-actions">
+      <button class="primary-btn" id="openLetterBtn">Read My Heart</button>
+      <button class="ghost-btn" id="complimentBtn">Today's Truth</button>
+    </div>
+    <p id="complimentOutput" style="margin-top:20px;color:var(--rose-deep);font-family:var(--script);font-size:1.3rem;min-height:40px;"></p>
+  </section>
+
+  <section class="panel story">
+    <h2>Our Story</h2>
+    <p id="storyPara"></p>
+    <p class="highlight">We have walked through storms that tested everything we thought we knew about each other. There were days when the distance felt unbearable, days when we didn't know if we could fix what felt so broken. But something kept us coming back — not because it was easy, but because losing you was never an option. In every conflict, every moment of doubt, we found our way back to the simplest truth: we belong with each other. Seven months later, that remains the most unshakeable certainty I've ever known.</p>
+  </section>
+
+  <section class="panel" style="padding:44px;">
+    <div class="section-heading">
+      <h2>The Timeline of Us</h2>
+      <p>Moments that became milestones</p>
+    </div>
+    <div class="timeline" id="timelineWrap"></div>
+  </section>
+
+  <section class="panel letters">
+    <div class="section-heading">
+      <h2>Letters of Love</h2>
+      <p>Words I want you to hold onto</p>
+    </div>
+    <div class="letter-box" id="openLetterBtn2">
+      <h3>💌 To My Shona</h3>
+      <p>The letter that says everything I feel...</p>
+    </div>
+    <div class="letter-box" id="finalPromiseBtn">
+      <h3>🤝 My Promise</h3>
+      <p>What I'm committed to for us...</p>
+    </div>
+  </section>
+</div>
+
+<div id="modal">
+  <div class="modal-content">
+    <button id="closeModal">✕</button>
+    <h2 id="modalTitle"></h2>
+    <p id="modalText"></p>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+  const relationshipStart = new Date(2026, 1, 15, 12, 0, 0); // February 15, 2026
+
+  const timelineData = [
+    { year: "15/02/2026", icon: "💍", title: "The Day You Said Yes", text: "The day I got down on one knee and asked you the most important question of my life. You said yes, and that's where our beautiful journey as an engaged couple began." },
+    { year: "February 2026", icon: "❤️", title: "Our First Month", text: "Our first month together after that unforgettable yes. Every day felt a little more special because I knew I was building my future with you." },
+    { year: "March 2026", icon: "🌙", title: "Growing Closer", text: "Another month of us — learning, understanding, laughing, and becoming even more certain about the life we want together." },
+    { year: "April 2026", icon: "🌱", title: "Growing Together", text: "We kept building our bond, making memories, and discovering more reasons to be grateful for each other." },
+    { year: "May 2026", icon: "✨", title: "More Memories", text: "Another chapter of our story, filled with little moments that became memories I never want to forget." },
+    { year: "June 2026", icon: "💗", title: "Still Choosing You", text: "With every passing month, I became even more sure that choosing you was the best decision I've ever made." },
+    { year: "July 2026", icon: "🥰", title: "Our Little Forever", text: "Our story kept growing, one ordinary day at a time, into something that feels anything but ordinary." },
+    { year: "15/09/2026", icon: "🎉", title: "7 Months of Us", text: "Seven months since you said yes. Seven months of memories, love, growth, and countless reasons to look forward to everything still waiting for us." }
+  ];
+
+  const compliments = [
+    "Shona, you work harder than anyone I know, and it doesn't go unnoticed.",
+    "Shona, your face is still the first good thing I think of most mornings.",
+    "Shona, you understand me in ways I haven't figured out myself yet.",
+    "Shona, even on your tired days, you show up more fully than most people do on their best.",
+    "Shona, you are so deeply worthy of every good thing coming your way.",
+    "Shona, you make ordinary days feel like they matter.",
+    "Shona, you stayed when leaving would have been easier.",
+    "Shona, seven months later, I'm still amazed that you chose me."
+  ];
+
+  const mainLetter = `My Dearest Shona,
+
+Seven months. I still can't believe that's how long we've been building this together.
+
+I want you to know something that I hope you've felt all along — you were worth every hard day. Every argument we worked through, every late night we stayed on calls even when we were exhausted, every moment we chose each other over giving up. None of it was wasted. All of it brought us here.
+
+You work harder than anyone I know. Not just at life, but at us. You've sat with me through my worst moments without trying to fix me. You understood parts of me that I'm still learning about myself. Even on the days when you were completely exhausted, you showed up with your whole heart.
+
+I want to promise you something tonight: I'm not going anywhere. We've been through things that could have broken us, but we didn't break. We bent. We fought. We came back. And I would do it all again just to keep you.
+
+Seven months down. I'm not sure how many more we have, but I know this — whatever comes next, I want to face it with your hand in mine.
+
+Thank you for choosing us. Thank you for staying.
+
+Forever yours,
+Ayush`;
+
+  const finalPromise = `Shona,
+
+I won't promise that everything will always be easy. That's not how life works, and you deserve honesty more than you deserve empty words.
+
+But I can promise this:
+
+I won't give up on us over something we can still work through. On the days when we're not speaking, I'll still be thinking about how to make it right. On the days when everything feels broken, I'll be the one holding the pieces with you until we figure out how to put it back together.
+
+I promise to keep showing up — on the good days and the impossible days. To fight for us, to grow with you, to be the person you deserve.
+
+I promise that seven months from now, I'll still be amazed that you chose me. Still grateful. Still yours.
+
+That's what I can promise. And I mean it with every part of my heart.
+
+With all my love,
+Ayush`;
+
+  const storyText = "Seven months ago, I asked you the most important question of my life, and you said yes. In these seven months, you've made me the happiest man alive. Every single day since then, I wake up amazed that you're going to be my wife. We've already learned so much about each other, weathered small storms, and discovered that we can build something truly real together. These seven months are just the beginning of our forever story.";
+
+  const $ = (id) => document.getElementById(id);
+  const modal = $("modal"), modalTitle = $("modalTitle"), modalText = $("modalText"), toast = $("toast");
+  const petalLayer = $("petalLayer"), sparkLayer = $("sparkLayer");
+
+  function renderTimeline(){
+    const wrap = $("timelineWrap");
+    wrap.innerHTML = "";
+    timelineData.forEach(item=>{
+      const el = document.createElement("article");
+      el.className = "timeline-item";
+      el.innerHTML = `<div class="timeline-icon">${item.icon}</div><div><h3>${item.year}: ${item.title}</h3><p>${item.text}</p></div>`;
+      el.addEventListener("click", ()=>openModal(item.title, item.text, true));
+      wrap.appendChild(el);
+    });
+  }
+
+  let typeTimer;
+  function openModal(title, text, animate=false){
+    modal.classList.add("show");
+    modalTitle.textContent = title;
+    modalText.textContent = "";
+    clearInterval(typeTimer);
+    if(!animate){ modalText.textContent = text; return; }
+    let i = 0;
+    typeTimer = setInterval(()=>{
+      modalText.textContent += text[i] || "";
+      i++;
+      if(i >= text.length) clearInterval(typeTimer);
+    }, 12);
+  }
+  function closeModal(){ modal.classList.remove("show"); clearInterval(typeTimer); }
+  $("closeModal").addEventListener("click", closeModal);
+  modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
+
+  let toastTimer;
+  function showToast(text){
+    toast.textContent = text;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(()=>toast.classList.remove("show"), 2200);
+  }
+
+  function updateCountdown(){
+    const now = new Date();
+    const diff = now - relationshipStart;
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff/(1000*60*60))%24);
+    const minutes = Math.floor((diff/(1000*60))%60);
+    const seconds = Math.floor((diff/1000)%60);
+    $("days").textContent = days;
+    $("hours").textContent = String(hours).padStart(2,"0");
+    $("minutes").textContent = String(minutes).padStart(2,"0");
+    $("seconds").textContent = String(seconds).padStart(2,"0");
+  }
+
+  function dropPetals(count=20){
+    const symbols = ["💕","✨","🌹","💗","❤️"];
+    for(let i=0;i<count;i++){
+      setTimeout(()=>{
+        const petal = document.createElement("div");
+        petal.className = "petal";
+        petal.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+        petal.style.left = Math.random()*window.innerWidth + "px";
+        petal.style.animationDuration = (3+Math.random()*3)+"s";
+        petal.style.fontSize = (18+Math.random()*18)+"px";
+        petalLayer.appendChild(petal);
+        setTimeout(()=>petal.remove(), 6500);
+      }, i*90);
+    }
+  }
+
+  document.addEventListener("mousemove",(e)=>{
+    if(Math.random() > 0.93){
+      const spark = document.createElement("div");
+      spark.className = "spark";
+      spark.textContent = ["💕","✨","💗"][Math.floor(Math.random()*3)];
+      spark.style.left = e.clientX+"px";
+      spark.style.top = e.clientY+"px";
+      spark.style.color = ["#e84c6f","#f472b6","#ffffff"][Math.floor(Math.random()*3)];
+      const tx = (Math.random()-0.5)*100;
+      const ty = (Math.random()-0.5)*100;
+      spark.style.setProperty("--tx", tx+"px");
+      spark.style.setProperty("--ty", ty+"px");
+      sparkLayer.appendChild(spark);
+      setTimeout(()=>spark.remove(), 1000);
+    }
+  });
+
+  $("themeToggle").addEventListener("click", ()=>{
+    document.body.classList.toggle("night");
+    showToast(document.body.classList.contains("night") ? "Night mode 🌙" : "Day mode ☀️");
+  });
+  $("petalBtn").addEventListener("click", ()=>{ dropPetals(28); showToast("💕"); });
+  $("openLetterBtn").addEventListener("click", ()=>{ openModal("To My Shona", mainLetter, true); dropPetals(18); });
+  $("openLetterBtn2").addEventListener("click", ()=>{ openModal("To My Shona", mainLetter, true); dropPetals(18); });
+  $("complimentBtn").addEventListener("click", ()=>{
+    const line = compliments[Math.floor(Math.random()*compliments.length)];
+    $("complimentOutput").textContent = line;
+    dropPetals(8);
+    showToast("💗");
+  });
+  $("finalPromiseBtn").addEventListener("click", ()=>{ openModal("My Promise", finalPromise, true); dropPetals(30); });
+
+  $("storyPara").textContent = storyText;
+
+  renderTimeline();
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Auto-play petal effect on load
+  setTimeout(() => dropPetals(12), 800);
+</script>
+</body>
+</html>
