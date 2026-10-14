@@ -3,30 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To My Forever Person — Shona & Jaan ❤️</title>
+  <title>To My Forever Person — Shivangi & Ayush ❤️</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* New Theme: Romantic Crimson & Soft Peach */
-      --color-bg: #FFF5F7;
+      /* New Theme: Twilight Lavender & Champagne Gold */
+      --color-bg: #F8F7FF;
       --color-cream: #FFFFFF;
-      --color-blush: #FFE4E8;
-      --color-blush-dark: #FFC0CB;
-      --color-rose: #E63946; /* Vibrant Red */
-      --color-rose-deep: #900C3F; /* Deep Crimson */
-      --color-lavender: #FFF0F3;
-      --color-lavender-dark: #FFD1DC;
-      --color-lavender-text: #C70039;
+      --color-blush: #EBE4FF;
+      --color-blush-dark: #D4C6F0;
+      --color-rose: #9D74C9; 
+      --color-rose-deep: #4A2B68; 
+      --color-lavender: #FDFBFF;
+      --color-lavender-dark: #E2D9F3;
+      --color-lavender-text: #6A4C9C;
       --color-gold: #D4AF37;
       --color-gold-light: #F7E7A9;
-      --color-text-main: #2C1115;
-      --color-text-muted: #5C3A41;
-      --color-text-light: #9B869C;
+      --color-text-main: #2A1B38;
+      --color-text-muted: #5C4A6B;
+      --color-text-light: #8B7A9C;
       --glass-bg: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(230, 57, 70, 0.15);
-      --glass-shadow: 0 16px 36px rgba(144, 12, 63, 0.08), 0 4px 12px rgba(230, 57, 70, 0.05);
+      --glass-border: rgba(157, 116, 201, 0.25);
+      --glass-shadow: 0 16px 36px rgba(74, 43, 104, 0.08), 0 4px 12px rgba(157, 116, 201, 0.05);
       --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -45,18 +45,31 @@
     body {
       background-color: var(--color-bg);
       color: var(--color-text-main);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.7;
       overflow-x: hidden;
+      position: relative;
       min-height: 100vh;
-      background: radial-gradient(circle at 10% 20%, var(--color-blush) 0%, transparent 40%),
-                  radial-gradient(circle at 90% 40%, var(--color-lavender) 0%, transparent 45%),
-                  radial-gradient(circle at 30% 80%, #FFEBEB 0%, transparent 50%),
-                  radial-gradient(circle at 80% 90%, var(--color-blush) 0%, transparent 40%),
+      background: radial-gradient(circle at 10% 20%, #EBE4FF 0%, transparent 40%),
+                  radial-gradient(circle at 90% 40%, #FDFBFF 0%, transparent 45%),
+                  radial-gradient(circle at 30% 80%, #F5F0FF 0%, transparent 50%),
+                  radial-gradient(circle at 80% 90%, #EBE4FF 0%, transparent 40%),
                   var(--color-bg);
       background-attachment: fixed;
     }
 
+    /* Background Animation Canvas */
+    #ambientCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Container */
     .container {
       width: 100%;
       max-width: 1100px;
@@ -66,6 +79,7 @@
       z-index: 2;
     }
 
+    /* Typography */
     h1, h2, h3, h4 {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 600;
@@ -73,20 +87,179 @@
       line-height: 1.25;
     }
 
+    /* Navigation Bar */
+    .nav-wrapper {
+      position: fixed;
+      top: 20px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 100;
+      padding: 0 16px;
+      pointer-events: none;
+    }
+
+    .navbar {
+      pointer-events: auto;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--glass-border);
+      padding: 10px 24px;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(74, 43, 104, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      max-width: 95vw;
+    }
+
+    .nav-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--color-rose-deep);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-brand span.heart {
+      display: inline-block;
+      animation: heartbeat 1.8s infinite ease-in-out;
+      color: var(--color-rose);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-rose-deep);
+      background: var(--color-blush);
+    }
+
+    .audio-btn {
+      background: linear-gradient(135deg, #EBE4FF, #FDFBFF);
+      border: 1px solid rgba(157, 116, 201, 0.3);
+      color: var(--color-rose-deep);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: var(--transition-smooth);
+      box-shadow: 0 4px 10px rgba(157, 116, 201, 0.15);
+      position: relative;
+    }
+
+    .audio-btn:hover {
+      transform: scale(1.08);
+      background: linear-gradient(135deg, #D4C6F0, #E2D9F3);
+    }
+
+    .audio-btn.playing {
+      animation: pulseGlow 2s infinite ease-in-out;
+    }
+
+    /* Floating Quick Actions */
+    .floating-audio-fixed {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .float-pill {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--glass-border);
+      padding: 10px 18px;
+      border-radius: 50px;
+      box-shadow: 0 10px 25px rgba(74, 43, 104, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      color: var(--color-rose-deep);
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .float-pill:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 14px 30px rgba(74, 43, 104, 0.22);
+      background: #FFFFFF;
+    }
+
+    /* Sections General */
     section {
-      padding: 80px 0;
+      padding: 100px 0;
       position: relative;
       z-index: 2;
     }
 
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 60px;
+    }
+
+    .section-eyebrow {
+      display: inline-block;
+      font-family: 'Pinyon Script', cursive;
+      font-size: 2.2rem;
+      color: var(--color-rose);
+      margin-bottom: 4px;
+      transform: rotate(-2deg);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--color-text-main);
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-desc {
+      font-size: 1.05rem;
+      color: var(--color-text-muted);
+      line-height: 1.8;
+    }
+
     /* Hero Section */
     .hero-section {
-      min-height: 80vh;
+      min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding-top: 60px;
+      padding-top: 130px;
+      padding-bottom: 70px;
+      position: relative;
     }
 
     .hero-badge {
@@ -94,26 +267,30 @@
       align-items: center;
       gap: 8px;
       padding: 8px 22px;
-      background: rgba(255, 228, 232, 0.85);
-      border: 1px solid rgba(230, 57, 70, 0.3);
+      background: rgba(235, 228, 255, 0.85);
+      border: 1px solid rgba(157, 116, 201, 0.3);
       border-radius: 50px;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       font-weight: 600;
       color: var(--color-rose-deep);
       margin-bottom: 24px;
-      box-shadow: 0 4px 15px rgba(230, 57, 70, 0.12);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 15px rgba(157, 116, 201, 0.12);
+      animation: fadeInDown 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .hero-title {
       font-size: 4rem;
       font-weight: 700;
       color: var(--color-text-main);
+      line-height: 1.15;
       margin-bottom: 20px;
       letter-spacing: -1px;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
     }
 
     .hero-title span.glow-text {
-      background: linear-gradient(135deg, #900C3F 0%, #E63946 50%, #C70039 100%);
+      background: linear-gradient(135deg, #4A2B68 0%, #9D74C9 50%, #6A4C9C 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
@@ -121,10 +298,11 @@
 
     .hero-petnames {
       font-family: 'Pinyon Script', cursive;
-      font-size: 3.5rem;
+      font-size: 3.2rem;
       color: var(--color-rose);
       line-height: 1;
       margin-bottom: 24px;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
     }
 
     .hero-subtitle {
@@ -133,9 +311,397 @@
       max-width: 680px;
       margin: 0 auto 36px;
       font-weight: 400;
+      line-height: 1.8;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
     }
 
-    /* Section: Heartfelt Letter */
+    /* Timer / Counter Styles */
+    .live-counter-box {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 40px;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.45s both;
+    }
+    
+    .time-unit {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 12px 20px;
+      min-width: 80px;
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .time-unit span.value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-rose-deep);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .time-unit span.label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--color-text-muted);
+      font-weight: 600;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #9D74C9, #4A2B68);
+      color: #FFFFFF;
+      padding: 14px 34px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(74, 43, 104, 0.28);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 32px rgba(74, 43, 104, 0.38);
+      color: #FFFFFF;
+    }
+
+    .btn-secondary {
+      background: var(--glass-bg);
+      color: var(--color-text-main);
+      padding: 14px 30px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--glass-shadow);
+      transition: var(--transition-smooth);
+    }
+
+    .btn-secondary:hover {
+      background: #FFFFFF;
+      transform: translateY(-3px);
+      color: var(--color-rose-deep);
+      border-color: var(--color-rose);
+    }
+
+    /* Hero Heart Locket Centerpiece */
+    .hero-locket {
+      margin-top: 48px;
+      position: relative;
+      display: inline-block;
+      animation: floatSlow 6s ease-in-out infinite;
+    }
+
+    .locket-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(157, 116, 201, 0.25) 0%, rgba(24DFBFF, 0.2) 50%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(20px);
+      z-index: 0;
+      animation: pulseGlow 4s infinite alternate;
+    }
+
+    .locket-card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      border-radius: 28px;
+      padding: 24px 32px;
+      box-shadow: 0 20px 45px rgba(74, 43, 104, 0.12), inset 0 0 20px rgba(235, 228, 255, 0.5);
+      backdrop-filter: blur(16px);
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .locket-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #EBE4FF, #FDFBFF);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 6px 16px rgba(157, 116, 201, 0.18);
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .locket-icon::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 1px dashed var(--color-rose);
+      border-radius: 50%;
+      animation: spinSlow 20s linear infinite;
+    }
+
+    .locket-text {
+      text-align: left;
+    }
+
+    .locket-text h4 {
+      font-size: 1.15rem;
+      color: var(--color-rose-deep);
+      margin-bottom: 4px;
+    }
+
+    .locket-text p {
+      font-size: 0.9rem;
+      color: var(--color-text-muted);
+      line-height: 1.5;
+    }
+
+    /* Section: Our Little Universe */
+    .universe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+      gap: 28px;
+    }
+
+    .universe-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(12px);
+      transition: var(--transition-smooth);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .universe-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #EBE4FF, #9D74C9, #D4C6F0);
+      opacity: 0;
+      transition: var(--transition-smooth);
+    }
+
+    .universe-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 45px rgba(74, 43, 104, 0.15);
+      border-color: rgba(157, 116, 201, 0.35);
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .universe-card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon-box {
+      width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #F5F0FF, #FAF8FF);
+      border: 1px solid rgba(157, 116, 201, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(74, 43, 104, 0.08);
+      transition: var(--transition-smooth);
+    }
+
+    .universe-card:hover .card-icon-box {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .universe-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+      color: var(--color-text-main);
+    }
+
+    .universe-card p {
+      font-size: 0.96rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .card-sparkle-tag {
+      font-family: 'Sacramento', cursive;
+      font-size: 1.45rem;
+      color: var(--color-rose);
+      align-self: flex-start;
+    }
+
+    /* Section: Growing Together (The Journey & Pillars) */
+    .growing-container {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(235, 228, 255, 0.6));
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 56px 40px;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(16px);
+      position: relative;
+    }
+
+    .quote-banner {
+      max-width: 820px;
+      margin: 0 auto 50px;
+      text-align: center;
+      position: relative;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.7);
+      border-radius: 20px;
+      border: 1px solid rgba(157, 116, 201, 0.15);
+    }
+
+    .quote-banner p {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.55rem;
+      font-style: italic;
+      color: var(--color-text-main);
+      line-height: 1.6;
+    }
+
+    .quote-banner span.author {
+      display: block;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--color-rose-deep);
+      font-weight: 700;
+      margin-top: 14px;
+      font-style: normal;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    .pillar-card {
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 28px 24px;
+      border: 1px solid rgba(226, 217, 243, 0.9);
+      box-shadow: 0 8px 20px rgba(106, 76, 156, 0.06);
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--color-lavender-dark);
+      box-shadow: 0 16px 30px rgba(106, 76, 156, 0.12);
+    }
+
+    .pillar-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--color-lavender-text);
+      opacity: 0.5;
+      margin-bottom: 8px;
+    }
+
+    .pillar-card h4 {
+      font-size: 1.2rem;
+      color: var(--color-text-main);
+      margin-bottom: 10px;
+    }
+
+    .pillar-card p {
+      font-size: 0.92rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    /* Study / Cheer Pill Generator */
+    .cheer-box {
+      margin-top: 40px;
+      text-align: center;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      border: 1px dashed var(--color-rose);
+    }
+
+    .cheer-btn {
+      background: linear-gradient(135deg, #6A4C9C, #9D74C9);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-smooth);
+      box-shadow: 0 6px 18px rgba(106, 76, 156, 0.25);
+    }
+
+    .cheer-btn:hover {
+      transform: scale(1.04);
+      box-shadow: 0 10px 24px rgba(106, 76, 156, 0.35);
+    }
+
+    .cheer-display {
+      margin-top: 16px;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--color-rose-deep);
+      min-height: 38px;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Section: Heartfelt Letter (Centerpiece) */
+    .letter-section {
+      padding: 100px 0;
+    }
+
     .letter-envelope-container {
       max-width: 820px;
       margin: 0 auto;
@@ -144,12 +710,12 @@
 
     .letter-paper {
       background: #FFFFFF;
-      background-image: radial-gradient(#FFC0CB 0.75px, transparent 0.75px);
+      background-image: radial-gradient(#E2D9F3 0.75px, transparent 0.75px);
       background-size: 24px 24px;
-      border: 1px solid rgba(230, 57, 70, 0.2);
+      border: 1px solid rgba(157, 116, 201, 0.2);
       border-radius: 28px;
       padding: 56px 48px;
-      box-shadow: 0 25px 60px rgba(144, 12, 63, 0.12), 0 4px 16px rgba(0, 0, 0, 0.02);
+      box-shadow: 0 25px 60px rgba(74, 43, 104, 0.12), 0 4px 16px rgba(0, 0, 0, 0.02);
       position: relative;
     }
 
@@ -160,7 +726,7 @@
       left: 14px;
       right: 14px;
       bottom: 14px;
-      border: 1px solid rgba(230, 57, 70, 0.12);
+      border: 1px solid rgba(157, 116, 201, 0.12);
       border-radius: 20px;
       pointer-events: none;
     }
@@ -169,9 +735,9 @@
       position: absolute;
       top: 36px;
       right: 44px;
-      width: 80px;
-      height: 90px;
-      background: #FFF5F7;
+      width: 70px;
+      height: 85px;
+      background: #FDFBFF;
       border: 2px dashed var(--color-rose);
       border-radius: 8px;
       display: flex;
@@ -179,43 +745,46 @@
       align-items: center;
       justify-content: center;
       color: var(--color-rose-deep);
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 1px;
-      transform: rotate(6deg);
+      transform: rotate(4deg);
+      box-shadow: 0 4px 10px rgba(157, 116, 201, 0.15);
     }
 
     .letter-stamp span.stamp-heart {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       margin-bottom: 2px;
     }
 
     .letter-salutation {
       font-family: 'Pinyon Script', cursive;
-      font-size: 3rem;
+      font-size: 2.8rem;
       color: var(--color-rose-deep);
       margin-bottom: 24px;
+      line-height: 1;
     }
 
     .letter-body {
       font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.45rem;
+      font-size: 1.35rem;
       line-height: 1.85;
       color: #382A3A;
-      margin-bottom: 24px;
+      margin-bottom: 32px;
     }
 
     .letter-highlight-box {
-      background: rgba(255, 228, 232, 0.6);
-      border-left: 4px solid var(--color-rose);
+      background: rgba(235, 228, 255, 0.6);
+      border-left: 3px solid var(--color-rose);
       padding: 24px 28px;
       margin: 28px 0;
       border-radius: 0 16px 16px 0;
       font-style: italic;
       color: #2D1E2D;
-      font-size: 1.45rem;
+      font-size: 1.38rem;
       line-height: 1.75;
+      box-shadow: 0 4px 15px rgba(157, 116, 201, 0.06);
     }
 
     .typewriter-cursor {
@@ -228,70 +797,1303 @@
       animation: blink 0.8s infinite;
     }
 
+    .letter-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(157, 116, 201, 0.15);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .letter-signoff {
+      font-family: 'Sacramento', cursive;
+      font-size: 2.3rem;
+      color: var(--color-rose-deep);
+      text-align: right;
+      line-height: 1.2;
+    }
+
+    .letter-btn {
+      background: var(--color-blush);
+      border: 1px solid rgba(157, 116, 201, 0.3);
+      color: var(--color-rose-deep);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+
+    .letter-btn:hover {
+      background: var(--color-rose);
+      color: #FFFFFF;
+    }
+
+    /* Section: Sacred Promises */
+    .promises-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 26px;
+    }
+
+    .promise-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(12px);
+      transition: var(--transition-smooth);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .promise-card:hover {
+      transform: translateY(-6px);
+      background: #FFFFFF;
+      box-shadow: 0 20px 40px rgba(74, 43, 104, 0.14);
+      border-color: rgba(157, 116, 201, 0.4);
+    }
+
+    .promise-seal {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #EBE4FF, #9D74C9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(157, 116, 201, 0.25);
+    }
+
+    .promise-card h3 {
+      font-size: 1.3rem;
+      color: var(--color-text-main);
+      margin-bottom: 10px;
+    }
+
+    .promise-card p {
+      font-size: 0.94rem;
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    .promise-hint {
+      margin-top: 14px;
+      font-size: 0.78rem;
+      color: var(--color-rose);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .promise-extra {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 1px dashed transparent;
+      font-size: 0.88rem;
+      color: var(--color-rose-deep);
+      font-style: italic;
+    }
+
+    .promise-card.active .promise-extra {
+      max-height: 120px;
+      opacity: 1;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top-color: rgba(157, 116, 201, 0.25);
+    }
+
+    /* Section: Jar of Sweet Affirmations */
+    .jar-section {
+      text-align: center;
+    }
+
+    .jar-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 48px 36px;
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .jar-icon {
+      font-size: 3.5rem;
+      display: inline-block;
+      margin-bottom: 16px;
+      animation: gentleWiggle 4s ease-in-out infinite;
+    }
+
+    .note-card-display {
+      background: #FFFFFF;
+      border: 2px dashed rgba(157, 116, 201, 0.35);
+      border-radius: 20px;
+      padding: 32px 24px;
+      margin: 28px 0;
+      min-height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(157, 116, 201, 0.08);
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .note-tag {
+      position: absolute;
+      top: -12px;
+      background: linear-gradient(135deg, #9D74C9, #4A2B68);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 16px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .note-content {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.45rem;
+      font-style: italic;
+      color: var(--color-text-main);
+      line-height: 1.6;
+    }
+
+    .jar-btn {
+      background: linear-gradient(135deg, #9D74C9, #6A4C9C);
+      color: #FFFFFF;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(74, 43, 104, 0.25);
+      transition: var(--transition-smooth);
+    }
+
+    .jar-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 16px 32px rgba(74, 43, 104, 0.35);
+    }
+
+    /* Virtual Hug Sparkle Trigger */
+    .hug-section {
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    .hug-box {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 36px;
+      background: linear-gradient(135deg, rgba(235, 228, 255, 0.8), rgba(24DFBFF, 0.8));
+      border-radius: 28px;
+      border: 1px solid rgba(157, 116, 201, 0.25);
+      box-shadow: var(--glass-shadow);
+    }
+
+    .hug-btn {
+      background: #FFFFFF;
+      color: var(--color-rose-deep);
+      border: 2px solid var(--color-rose);
+      padding: 14px 32px;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(157, 116, 201, 0.15);
+      transition: var(--transition-smooth);
+    }
+
+    .hug-btn:hover {
+      background: var(--color-rose);
+      color: #FFFFFF;
+      transform: scale(1.05);
+      box-shadow: 0 14px 28px rgba(157, 116, 201, 0.3);
+    }
+
+    /* Closing Banner Section */
+    .closing-section {
+      text-align: center;
+      padding: 110px 0 130px;
+      position: relative;
+    }
+
+    .closing-card {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.94), rgba(235, 228, 255, 0.8));
+      border: 1px solid var(--glass-border);
+      border-radius: 36px;
+      padding: 70px 40px;
+      box-shadow: 0 25px 60px rgba(74, 43, 104, 0.15);
+      backdrop-filter: blur(16px);
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .closing-eyebrow {
+      font-family: 'Pinyon Script', cursive;
+      font-size: 3rem;
+      color: var(--color-rose);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .closing-message {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--color-text-main);
+      line-height: 1.35;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .closing-subtext {
+      font-size: 1.15rem;
+      color: var(--color-text-muted);
+      max-width: 640px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+
+    .closing-heart {
+      font-size: 2.8rem;
+      display: inline-block;
+      animation: heartbeat 1.5s infinite ease-in-out;
+      color: var(--color-rose);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 36px 0;
+      color: var(--color-text-light);
+      font-size: 0.88rem;
+      border-top: 1px solid rgba(157, 116, 201, 0.12);
+      position: relative;
+      z-index: 2;
+    }
+
+    footer p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    /* Toast Notification for Virtual Hug */
+    .toast-popup {
+      position: fixed;
+      bottom: 90px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(42, 27, 56, 0.95);
+      color: #FFFFFF;
+      padding: 14px 28px;
+      border-radius: 50px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+      font-size: 0.95rem;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .toast-popup.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Animations */
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14% { transform: scale(1.18); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.12); }
+      70% { transform: scale(1); }
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: translate(-50%, -50%) scale(0.95); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.15); opacity: 0.9; }
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes spinSlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes gentleWiggle {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+    }
+
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
     }
 
-    .letter-controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px dashed rgba(230, 57, 70, 0.3);
-      font-family: 'Playfair Display', serif;
-      color: var(--color-rose-deep);
-      font-size: 1.2rem;
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Mobile Responsiveness */
+    @media (max-width: 768px) {
+      .navbar {
+        gap: 12px;
+        padding: 8px 16px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-title {
+        font-size: 2.6rem;
+      }
+      .hero-petnames {
+        font-size: 2.4rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      .closing-message {
+        font-size: 1.8rem;
+      }
+      .letter-paper {
+        padding: 36px 20px;
+      }
+      .letter-stamp {
+        top: 20px;
+        right: 20px;
+        width: 54px;
+        height: 68px;
+        font-size: 0.65rem;
+      }
+      .growing-container {
+        padding: 36px 20px;
+      }
+      .closing-card {
+        padding: 40px 20px;
+      }
+      .locket-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+      }
+      .locket-text {
+        text-align: center;
+      }
+      .hero-section {
+        padding-top: 100px;
+      }
+      .floating-audio-fixed {
+        bottom: 16px;
+        right: 16px;
+      }
+      .live-counter-box {
+        gap: 8px;
+      }
+      .time-unit {
+        min-width: 60px;
+        padding: 8px 10px;
+      }
+      .time-unit span.value {
+        font-size: 1.3rem;
+      }
+      .time-unit span.label {
+        font-size: 0.65rem;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Ambient Particle & Heart Canvas -->
+  <canvas id="ambientCanvas"></canvas>
+
+  <!-- Top Glass Navigation -->
+  <div class="nav-wrapper">
+    <nav class="navbar">
+      <a href="#hero" class="nav-brand">
+        <span>Shivangi & Ayush</span>
+        <span class="heart">❤️</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#universe">Our Universe</a></li>
+        <li><a href="#growing">Growing Together</a></li>
+        <li><a href="#letter">My Letter</a></li>
+        <li><a href="#promises">Our Promises</a></li>
+        <li><a href="#jar">Love Notes</a></li>
+      </ul>
+      <button class="audio-btn" id="audioToggleBtn" title="Play Sweet Background Melody" aria-label="Toggle Romantic Melody">
+        <span id="audioIcon">🎵</span>
+      </button>
+    </nav>
+  </div>
+
   <!-- Hero Section -->
-  <section class="hero-section">
+  <section class="hero-section" id="hero">
     <div class="container">
-      <div class="hero-badge">💍 Happy Proposal Anniversary</div>
-      <h1 class="hero-title"><span class="glow-text">8 Beautiful Months</span></h1>
-      <div class="hero-petnames">Shona & Jaan</div>
-      <p class="hero-subtitle">
-        Since February 15, 2026. Every single day since you said "yes" has been a dream come true.
+      <div class="hero-badge">
+        <span>✨</span>
+        <span>A Sanctuary of Endless Love & Growth</span>
+      </div>
+
+      <h1 class="hero-title">
+        To My <span class="glow-text">Forever Person</span> ❤️
+      </h1>
+
+      <div class="hero-petnames">
+        My Dearest Shivangi & Ayush
+      </div>
+
+      <p class="hero-subtitle" style="margin-bottom: 20px;">
+        A beautiful journey that started on February 15, 2026. Every single second with you is a blessing.
       </p>
-    </div>
-  </section>
 
-  <!-- Letter Section -->
-  <section class="letter-section">
-    <div class="container letter-envelope-container">
-      <div class="letter-paper">
-        <div class="letter-stamp">
-          <span class="stamp-heart">❤️</span>
-          15.02.26
+      <!-- Live Counter Box -->
+      <div class="live-counter-box">
+        <div class="time-unit">
+          <span class="value" id="c-months">0</span>
+          <span class="label">Months</span>
         </div>
-        <h2 class="letter-salutation">My Dearest Pookie,</h2>
-        
-        <p class="letter-body">
-          Happy 8-Month Proposal Anniversary! Exactly eight months ago on February 15th, you made me the happiest person in the entire world by saying yes. 
-        </p>
-
-        <p class="letter-body">
-          These past eight months have been filled with so much love, warmth, and excitement for our future. I just wanted to remind you today of how deeply and endlessly I love you. 
-        </p>
-
-        <div class="letter-highlight-box">
-          "I love you more today than yesterday, but not as much as tomorrow."<span class="typewriter-cursor"></span>
+        <div class="time-unit">
+          <span class="value" id="c-days">0</span>
+          <span class="label">Days</span>
         </div>
+        <div class="time-unit">
+          <span class="value" id="c-hours">0</span>
+          <span class="label">Hours</span>
+        </div>
+        <div class="time-unit">
+          <span class="value" id="c-minutes">0</span>
+          <span class="label">Mins</span>
+        </div>
+        <div class="time-unit">
+          <span class="value" id="c-seconds">0</span>
+          <span class="label">Secs</span>
+        </div>
+      </div>
 
-        <p class="letter-body">
-          Here is to the beautiful 8 months we've shared since that magical day, and to the lifetime of memories we have yet to make.
-        </p>
-        
-        <div class="letter-controls">
-          Forever Yours
+      <div class="hero-cta-group">
+        <a href="#letter" class="btn-primary">
+          <span>Read My Letter</span>
+          <span>💌</span>
+        </a>
+        <a href="#universe" class="btn-secondary">
+          <span>Our Little Universe</span>
+          <span>🌸</span>
+        </a>
+      </div>
+
+      <!-- Centerpiece Heart Locket -->
+      <div class="hero-locket">
+        <div class="locket-glow"></div>
+        <div class="locket-card">
+          <div class="locket-icon">
+            <span>💖</span>
+          </div>
+          <div class="locket-text">
+            <h4>Every Moment is a Blessing</h4>
+            <p>From the simplest conversations to the grandest dreams we envision, having you by my side makes every single day brighter.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Section 1: Our Little Universe -->
+  <section id="universe">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Our sacred space</span>
+        <h2 class="section-title">Our Little Universe</h2>
+        <p class="section-desc">
+          The quiet moments, gentle laughter, and unconditional affection that make our bond something truly special and one of a kind.
+        </p>
+      </div>
+
+      <div class="universe-grid">
+        <div class="universe-card" onclick="createHeartBurst(event)">
+          <div class="card-icon-box">☀️</div>
+          <h3>The Light You Bring</h3>
+          <p>
+            Your presence brings a calm, radiant warmth that effortlessly melts away stress. Your smile has an unspoken power to turn my heaviest days into moments of genuine peace and comfort.
+          </p>
+          <span class="card-sparkle-tag">My brightest star</span>
+        </div>
+
+        <div class="universe-card" onclick="createHeartBurst(event)">
+          <div class="card-icon-box">💬</div>
+          <h3>Our Quiet Conversations</h3>
+          <p>
+            From playful giggles to late-night reflections about our dreams, every conversation with you is a sanctuary. Talking with you feels like resting in the safest place in the world.
+          </p>
+          <span class="card-sparkle-tag">Endless warmth</span>
+        </div>
+
+        <div class="universe-card" onclick="createHeartBurst(event)">
+          <div class="card-icon-box">✨</div>
+          <h3>The Little Everyday Moments</h3>
+          <p>
+            Random check-ins, remembering little details about each other's days, and sharing private smiles. It’s not just big milestones; it's the tender everyday tapestry we weave together.
+          </p>
+          <span class="card-sparkle-tag">Precious memories</span>
+        </div>
+
+        <div class="universe-card" onclick="createHeartBurst(event)">
+          <div class="card-icon-box">🌿</div>
+          <h3>Patience & Understanding</h3>
+          <p>
+            We celebrate our bond with patience, empathy, and kindness. Knowing we can communicate openly, listen wholeheartedly, and hold space for one another is our greatest strength.
+          </p>
+          <span class="card-sparkle-tag">Gentle harmony</span>
+        </div>
+
+        <div class="universe-card" onclick="createHeartBurst(event)">
+          <div class="card-icon-box">🌷</div>
+          <h3>A Bond Built on Kindness</h3>
+          <p>
+            Treating each other with sweetness, genuine respect, and continuous admiration. You inspire me to be more considerate, thoughtful, and deeply loving in everything I do.
+          </p>
+          <span class="card-sparkle-tag">Pure affection</span>
+        </div>
+
+        <div class="universe-card" onclick="createHeartBurst(event)">
+          <div class="card-icon-box">🌌</div>
+          <h3>Shared Dreams in the Stars</h3>
+          <p>
+            Envisioning the tomorrow we want to build—working side by side, creating a warm home filled with laughter, and facing life's adventures together, hand in hand.
+          </p>
+          <span class="card-sparkle-tag">Our forever horizon</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Growing Together -->
+  <section id="growing">
+    <div class="container">
+      <div class="growing-container">
+        <div class="section-header" style="margin-bottom: 30px;">
+          <span class="section-eyebrow">Hand in Hand</span>
+          <h2 class="section-title">Growing Together</h2>
+          <p class="section-desc">
+            Supporting each other’s education, personal ambitions, and dreams with unwavering belief and encouragement.
+          </p>
+        </div>
+
+        <div class="quote-banner">
+          <p>
+            “True love is not just about spending every moment together, but about inspiring each other to rise, supporting each other's dreams, and becoming people we are both deeply proud of.”
+          </p>
+          <span class="author">— A Promise to My Love</span>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-number">01</div>
+            <h4>Championing Your Studies & Goals</h4>
+            <p>
+              I believe in your talent, intellect, and bright future with all my heart. When you study and work towards your goals, I will always be your quiet support system and biggest cheerleader.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-number">02</div>
+            <h4>Space to Flourish Individually</h4>
+            <p>
+              Our love gives us wings, not chains. We celebrate each other's personal space, passions, and growth, knowing that individual strength only deepens our shared connection.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-number">03</div>
+            <h4>Deepening Love in Busy Times</h4>
+            <p>
+              As life gets busier and responsibilities mount, our love doesn't diminish—it evolves. We value quality moments, meaningful words, and choosing each other with intention.
+            </p>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-number">04</div>
+            <h4>Building Our Future Responsibly</h4>
+            <p>
+              Preparing ourselves for life's responsibilities side by side, solving challenges with grace and teamwork, and creating a lifetime of security and mutual joy.
+            </p>
+          </div>
+        </div>
+
+        <!-- Interactive Cheer Generator -->
+        <div class="cheer-box">
+          <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 12px;">
+            Need a little burst of encouragement for your studies or your day, Shivangi?
+          </p>
+          <button class="cheer-btn" id="cheerBtn" onclick="generateCheer()">
+            <span>✨</span>
+            <span>Receive an Encouragement Pill</span>
+          </button>
+          <div class="cheer-display" id="cheerDisplay">
+            "You are so capable, smart, and wonderful. I believe in you always, Ayush!"
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Heartfelt Letter -->
+  <section class="letter-section" id="letter">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Straight from my soul</span>
+        <h2 class="section-title">A Letter to My Shivangi</h2>
+        <p class="section-desc">
+          Every word here is written with all the love, devotion, and reverence my heart holds for you.
+        </p>
+      </div>
+
+      <div class="letter-envelope-container">
+        <div class="letter-paper">
+          <div class="letter-stamp">
+            <span class="stamp-heart">❤️</span>
+            <span>Forever</span>
+            <span>Ayush</span>
+          </div>
+
+          <div class="letter-salutation">My Dearest Shivangi,</div>
+
+          <div class="letter-body" id="letterText">
+            <!-- Typewriter output goes here -->
+          </div>
+
+          <div class="letter-highlight-box" id="letterHighlight">
+            "Shivangi, I don't want us to just love each other. I want us to grow together, achieve our dreams together, and become people we can both be proud of. I want to be someone who brings peace, happiness, and encouragement into your life. No matter how busy life becomes, I want us to keep choosing each other, appreciating the little things, and making beautiful memories together. You are not just a part of my present; you are someone I dream of sharing my future with."
+          </div>
+
+          <div class="letter-body" id="letterEnding">
+            Thank you for being the sweetest blessing in my life. Thank you for your warmth, your patience, and your beautiful smile that makes my entire world complete. You will always be my Ayush, my safe haven, and my favorite thought.
+          </div>
+
+          <div class="letter-signoff">
+            With all my love & devotion,<br>
+            Forever Yours ❤️
+          </div>
+
+          <div class="letter-controls">
+            <button class="letter-btn" id="replayTypewriterBtn" onclick="restartLetter()">
+              <span>🔄 Replay Letter Typing</span>
+            </button>
+            <span style="font-size: 0.85rem; color: var(--color-text-muted); font-style: italic;">
+              Written with infinite love for my everything
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Sacred Promises -->
+  <section id="promises">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Our sacred vows</span>
+        <h2 class="section-title">Promises to Cherish</h2>
+        <p class="section-desc">
+          The values I promise to uphold every single day to protect, nurture, and celebrate our bond.
+        </p>
+      </div>
+
+      <div class="promises-grid">
+        <div class="promise-card" onclick="togglePromise(this)">
+          <div class="promise-seal">💎</div>
+          <h3>To Always Value & Cherish You</h3>
+          <p>
+            To never take a single day, text, smile, or caring gesture for granted. You are a treasure, and I will always remind you of how precious you are.
+          </p>
+          <div class="promise-hint">Tap to reveal pledge</div>
+          <div class="promise-extra">
+            "Every single morning, you will be my first gratitude, and every night my warmest peace."
+          </div>
+        </div>
+
+        <div class="promise-card" onclick="togglePromise(this)">
+          <div class="promise-seal">🕊️</div>
+          <h3>To Communicate with Kindness</h3>
+          <p>
+            To speak with gentleness, listen with an open and empathetic heart, and ensure that our conversations always remain a safe space of understanding.
+          </p>
+          <div class="promise-hint">Tap to reveal pledge</div>
+          <div class="promise-extra">
+            "Your feelings and thoughts will always be heard, respected, and comforted with tenderness."
+          </div>
+        </div>
+
+        <div class="promise-card" onclick="togglePromise(this)">
+          <div class="promise-seal">🚀</div>
+          <h3>To Champion Your Dreams</h3>
+          <p>
+            To stand proudly beside you in every study goal, academic hurdle, and career ambition. Your success and happiness will always be my shared celebration.
+          </p>
+          <div class="promise-hint">Tap to reveal pledge</div>
+          <div class="promise-extra">
+            "I will be the steady ground beneath your feet and the wind beneath your wings as you soar."
+          </div>
+        </div>
+
+        <div class="promise-card" onclick="togglePromise(this)">
+          <div class="promise-seal">⏳</div>
+          <h3>To Make Time for What Matters</h3>
+          <p>
+            No matter how busy schedules become, I promise to always prioritize intentional quality time, sweet check-ins, and meaningful shared moments.
+          </p>
+          <div class="promise-hint">Tap to reveal pledge</div>
+          <div class="promise-extra">
+            "Because life is lived in the moments we share, and with you, every second is golden."
+          </div>
+        </div>
+
+        <div class="promise-card" onclick="togglePromise(this)">
+          <div class="promise-seal">🛡️</div>
+          <h3>To Be Your Peace & Comfort</h3>
+          <p>
+            Whenever the world feels loud or overwhelming, I promise to be a soothing shelter where you can rest, exhale, and feel completely at ease.
+          </p>
+          <div class="promise-hint">Tap to reveal pledge</div>
+          <div class="promise-extra">
+            "In my arms and in my words, you will always find tranquil peace and steady warmth."
+          </div>
+        </div>
+
+        <div class="promise-card" onclick="togglePromise(this)">
+          <div class="promise-seal">💍</div>
+          <h3>To Build Our Future Together</h3>
+          <p>
+            To take responsibility with patience, walk through life's milestones hand in hand, and build a lasting, joyful life that we both adore.
+          </p>
+          <div class="promise-hint">Tap to reveal pledge</div>
+          <div class="promise-extra">
+            "Hand in hand, heart to heart, growing into our forever."
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Jar of Love Notes -->
+  <section class="jar-section" id="jar">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">A little daily sweetness</span>
+        <h2 class="section-title">Reasons I Love You</h2>
+        <p class="section-desc">
+          Tap the jar whenever you want a reminder of just how deeply and genuinely you are loved.
+        </p>
+      </div>
+
+      <div class="jar-wrapper">
+        <div class="jar-icon">🍯✨</div>
+        <div class="note-card-display" id="loveNoteDisplay">
+          <span class="note-tag" id="noteTag">Note #1</span>
+          <div class="note-content" id="noteText">
+            "Your laugh is my absolute favorite melody in the entire world—it brings instant light to my heart."
+          </div>
+        </div>
+        <button class="jar-btn" onclick="drawNextNote()">
+          <span>💌</span>
+          <span>Pick Another Sweet Note</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: Virtual Hug & Sparkles -->
+  <section class="hug-section">
+    <div class="container">
+      <div class="hug-box">
+        <h3 style="font-size: 1.5rem; margin-bottom: 12px; color: var(--color-text-main);">
+          Sending You a Warm Virtual Hug 🤗
+        </h3>
+        <p style="color: var(--color-text-muted); font-size: 0.95rem; margin-bottom: 22px;">
+          Whenever you need a reminder that someone loves you more than words can express.
+        </p>
+        <button class="hug-btn" onclick="triggerVirtualHug(event)">
+          <span>💖</span>
+          <span>Send Shivangi a Big Warm Hug</span>
+          <span>✨</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Closing Section -->
+  <section class="closing-section">
+    <div class="container">
+      <div class="closing-card">
+        <div class="closing-eyebrow">Forever & Always</div>
+        <h2 class="closing-message">
+          "No matter how much life changes, I hope we never stop finding happiness in each other."
+        </h2>
+        <p class="closing-subtext">
+          You are my beloved Shivangi, my precious Ayush, my sweetest present, and the most beautiful part of my tomorrow.
+        </p>
+        <div class="closing-heart">💖</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>
+        Dedicated with endless love, patience, and devotion to my Shivangi & Ayush <span>❤️</span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div class="toast-popup" id="toastPopup">
+    <span>🌸</span>
+    <span id="toastMsg">Sent with infinite love and warmth to my love!</span>
+  </div>
+
+  <!-- Floating Audio Pill -->
+  <div class="floating-audio-fixed">
+    <div class="float-pill" onclick="toggleAudio()">
+      <span id="floatingAudioIcon">🎶</span>
+      <span id="floatingAudioText">Play Melody</span>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================
+       0. LIVE RUNNING COUNTER
+       ========================================================== */
+    function updateCounter() {
+      // Set proposal date to Feb 15, 2026
+      const startDate = new Date('2026-02-15T00:00:00');
+      const now = new Date();
+      
+      let months = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth());
+      let days = now.getDate() - startDate.getDate();
+      
+      if (days < 0) {
+        months--;
+        const previousMonthDate = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += previousMonthDate.getDate();
+      }
+
+      let hours = now.getHours() - startDate.getHours();
+      if (hours < 0) {
+        days--;
+        hours += 24;
+      }
+
+      let minutes = now.getMinutes() - startDate.getMinutes();
+      if (minutes < 0) {
+        hours--;
+        minutes += 60;
+      }
+
+      let seconds = now.getSeconds() - startDate.getSeconds();
+      if (seconds < 0) {
+        minutes--;
+        seconds += 60;
+      }
+
+      // Update the DOM elements
+      document.getElementById('c-months').innerText = months >= 0 ? months : 0;
+      document.getElementById('c-days').innerText = days >= 0 ? days : 0;
+      document.getElementById('c-hours').innerText = hours >= 0 ? hours : 0;
+      document.getElementById('c-minutes').innerText = minutes >= 0 ? minutes : 0;
+      document.getElementById('c-seconds').innerText = seconds >= 0 ? seconds : 0;
+    }
+
+    // Run the counter immediately and update every second
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    /* ==========================================================
+       1. AMBIENT CANVAS: FLOATING PETALS, SOFT HEARTS & SPARKLES
+       ========================================================== */
+    const canvas = document.getElementById('ambientCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor(isHeart = false, startX, startY) {
+        this.reset(isHeart, startX, startY);
+      }
+
+      reset(isHeart = false, startX, startY) {
+        this.x = startX !== undefined ? startX : Math.random() * width;
+        this.y = startY !== undefined ? startY : Math.random() * height - 20;
+        this.size = Math.random() * 12 + 8;
+        this.speedY = Math.random() * 0.8 + 0.4;
+        this.speedX = Math.sin(Math.random() * 6) * 0.5;
+        this.rotation = Math.random() * 360;
+        this.rotSpeed = (Math.random() - 0.5) * 1.5;
+        this.opacity = Math.random() * 0.5 + 0.3;
+        this.isHeart = isHeart || Math.random() > 0.65;
+        this.hue = Math.random() > 0.5 ? 260 : 280; // Twilight purple tones
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.01) * 0.6;
+        this.rotation += this.rotSpeed;
+
+        if (this.y > height + 20) {
+          this.reset(false, Math.random() * width, -20);
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotation * Math.PI) / 180);
+        ctx.globalAlpha = this.opacity;
+
+        if (this.isHeart) {
+          // Draw a soft glowing pastel heart
+          ctx.fillStyle = this.hue === 260 ? '#B297E2' : '#8769B7';
+          const s = this.size * 0.65;
+          ctx.beginPath();
+          ctx.moveTo(0, s * 0.3);
+          ctx.bezierCurveTo(-s * 0.6, -s * 0.4, -s, s * 0.3, 0, s);
+          ctx.bezierCurveTo(s, s * 0.3, s * 0.6, -s * 0.4, 0, s * 0.3);
+          ctx.fill();
+        } else {
+          // Draw a delicate petal
+          ctx.fillStyle = '#EBE4FF';
+          ctx.strokeStyle = '#D4C6F0';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size * 0.8, this.size * 0.4, Math.PI / 4, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.stroke();
+        }
+
+        ctx.restore();
+      }
+    }
+
+    // Initialize 35 ambient particles
+    for (let i = 0; i < 35; i++) {
+      particles.push(new Particle(false, Math.random() * width, Math.random() * height));
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* Sparkle Burst Function on click/tap */
+    function createHeartBurst(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clickX = e.clientX || (e.touches && e.touches[0].clientX) || width / 2;
+      const clickY = e.clientY || (e.touches && e.touches[0].clientY) || height / 2;
+
+      for (let i = 0; i < 12; i++) {
+        const burstParticle = new Particle(true, clickX, clickY);
+        burstParticle.speedX = (Math.random() - 0.5) * 6;
+        burstParticle.speedY = (Math.random() - 0.8) * 5;
+        burstParticle.opacity = 0.9;
+        particles.push(burstParticle);
+      }
+
+      if (particles.length > 70) {
+        particles.splice(0, 12);
+      }
+    }
+
+    /* ==========================================================
+       2. TYPEWRITER EFFECT FOR THE HEARTFELT LETTER
+       ========================================================== */
+    const letterParagraphs = [
+      "I find myself thinking about the incredible journey we are sharing, and my heart fills with so much gratitude.",
+      "You bring a lightness and joy into my life that I treasure with every breath. In your smile, I find solace; in your voice, I find my favorite comfort. But more than anything, I admire the beautiful, dedicated, kind soul that you are."
+    ];
+
+    let currentPara = 0;
+    let currentChar = 0;
+    let typewriterTimeout;
+    const letterTextEl = document.getElementById('letterText');
+
+    function typeWriter() {
+      if (currentPara < letterParagraphs.length) {
+        const fullText = letterParagraphs[currentPara];
+        if (currentChar < fullText.length) {
+          let currentContent = letterParagraphs.slice(0, currentPara).map(p => `<p style="margin-bottom: 16px;">${p}</p>`).join('');
+          let activeLine = fullText.substring(0, currentChar + 1);
+          letterTextEl.innerHTML = currentContent + `<p style="margin-bottom: 16px;">${activeLine}<span class="typewriter-cursor"></span></p>`;
+          currentChar++;
+          typewriterTimeout = setTimeout(typeWriter, 28);
+        } else {
+          currentPara++;
+          currentChar = 0;
+          typewriterTimeout = setTimeout(typeWriter, 350);
+        }
+      } else {
+        let finalContent = letterParagraphs.map(p => `<p style="margin-bottom: 16px;">${p}</p>`).join('');
+        letterTextEl.innerHTML = finalContent;
+      }
+    }
+
+    function restartLetter() {
+      clearTimeout(typewriterTimeout);
+      currentPara = 0;
+      currentChar = 0;
+      letterTextEl.innerHTML = '';
+      typeWriter();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      typeWriter();
+    });
+
+    /* ==========================================================
+       3. INTERACTIVE PILLARS / PROMISE REVEAL
+       ========================================================== */
+    function togglePromise(card) {
+      card.classList.toggle('active');
+      const hint = card.querySelector('.promise-hint');
+      if (card.classList.contains('active')) {
+        hint.textContent = 'Tap to collapse';
+      } else {
+        hint.textContent = 'Tap to reveal pledge';
+      }
+      createHeartBurst({ clientX: card.getBoundingClientRect().left + 80, clientY: card.getBoundingClientRect().top + 50 });
+    }
+
+    /* ==========================================================
+       4. CHEER PILL GENERATOR (STUDIES & ENCOURAGEMENT)
+       ========================================================== */
+    const cheers = [
+      "“You are so capable, smart, and wonderful. I believe in you always, Ayush!” 🌟",
+      "“Take a deep breath, Shivangi. One step at a time. You’re going to achieve all your dreams!” 🌸",
+      "“I'm so proud of how hard you work. Remember to rest your pretty mind, my love.” ☕❤️",
+      "“Your focus and determination inspire me every single day. Keep shining!” 🚀",
+      "“No matter how heavy your load gets, I am right here cheering for you with all my love.” 💌",
+      "“You have everything it takes to succeed. Believe in yourself the way I believe in you!” ✨"
+    ];
+    let cheerIndex = 0;
+
+    function generateCheer() {
+      const display = document.getElementById('cheerDisplay');
+      display.style.opacity = '0';
+      setTimeout(() => {
+        cheerIndex = (cheerIndex + 1) % cheers.length;
+        display.textContent = cheers[cheerIndex];
+        display.style.opacity = '1';
+      }, 250);
+    }
+
+    /* ==========================================================
+       5. JAR OF SWEET AFFIRMATIONS / REASONS
+       ========================================================== */
+    const loveNotes = [
+      { tag: "Note #1", text: "“Your laugh is my absolute favorite melody in the entire world—it brings instant light to my heart.”" },
+      { tag: "Note #2", text: "“How passionate, sincere, and dedicated you are about your goals inspires me to be better every day.”" },
+      { tag: "Note #3", text: "“The effortless comfort I feel whenever I talk to you—you truly are my emotional home.”" },
+      { tag: "Note #4", text: "“The sweetness in your voice when you call my name with pure love and affection.”" },
+      { tag: "Note #5", text: "“How you make ordinary days feel memorable, colorful, and blessed simply by existing in them.”" },
+      { tag: "Note #6", text: "“Your gentle kindness and the big, compassionate heart you show to everyone around you.”" },
+      { tag: "Note #7", text: "“How we can talk about our deepest thoughts and dreams without fear or judgment.”" },
+      { tag: "Note #8", text: "“You are my favorite thought before falling asleep and my sweetest smile when I wake up.”" },
+      { tag: "Note #9", text: "“The way we support each other’s growth, believing in one another when life gets demanding.”" },
+      { tag: "Note #10", text: "“Every single vision I have of a happy future is centered around having you beside me, hand in hand.”" },
+      { tag: "Note #11", text: "“Your patience, your understanding, and the soft peace you bring into my life.”" },
+      { tag: "Note #12", text: "“Simply being you—the love of my life and my forever person.”" }
+    ];
+    let currentNoteIndex = 0;
+
+    function drawNextNote() {
+      const display = document.getElementById('loveNoteDisplay');
+      const tagEl = document.getElementById('noteTag');
+      const textEl = document.getElementById('noteText');
+
+      display.style.transform = 'scale(0.95)';
+      display.style.opacity = '0.5';
+
+      setTimeout(() => {
+        currentNoteIndex = (currentNoteIndex + 1) % loveNotes.length;
+        const note = loveNotes[currentNoteIndex];
+        tagEl.textContent = note.tag;
+        textEl.textContent = note.text;
+
+        display.style.transform = 'scale(1)';
+        display.style.opacity = '1';
+      }, 200);
+    }
+
+    /* ==========================================================
+       6. VIRTUAL HUG & SPARKLE SHOWER
+       ========================================================== */
+    function triggerVirtualHug(e) {
+      for (let i = 0; i < 25; i++) {
+        setTimeout(() => {
+          const burst = new Particle(true, Math.random() * width, height - 100);
+          burst.speedY = -(Math.random() * 4 + 2);
+          burst.speedX = (Math.random() - 0.5) * 4;
+          burst.opacity = 1;
+          particles.push(burst);
+        }, i * 40);
+      }
+      playSingleChime();
+      showToast("🤗 Infinite warm hugs & love sent straight to my love!");
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastPopup');
+      const msgEl = document.getElementById('toastMsg');
+      msgEl.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    /* ==========================================================
+       7. WEB AUDIO API: ROMANTIC CHIME / LULLABY SYNTHESIZER
+       ========================================================== */
+    let audioCtx = null;
+    let isPlaying = false;
+    let musicInterval = null;
+
+    const melodyNotes = [
+      349.23, 440.00, 523.25, 659.25, 523.25, 440.00, 
+      392.00, 493.88, 587.33, 659.25, 587.33, 493.88, 
+      329.63, 392.00, 493.88, 523.25, 392.00, 349.23  
+    ];
+    let noteStep = 0;
+
+    function initAudio() {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playBellTone(freq, duration = 2.2, gainLevel = 0.08) {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(gainLevel, audioCtx.currentTime + 0.08);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duration);
+    }
+
+    function playSingleChime() {
+      initAudio();
+      playBellTone(523.25, 1.8, 0.12);
+      setTimeout(() => playBellTone(659.25, 2.0, 0.1), 120);
+      setTimeout(() => playBellTone(783.99, 2.4, 0.09), 240);
+    }
+
+    function toggleAudio() {
+      initAudio();
+      isPlaying = !isPlaying;
+
+      const btn = document.getElementById('audioToggleBtn');
+      const icon = document.getElementById('audioIcon');
+      const floatIcon = document.getElementById('floatingAudioIcon');
+      const floatText = document.getElementById('floatingAudioText');
+
+      if (isPlaying) {
+        btn.classList.add('playing');
+        icon.textContent = '⏸️';
+        floatIcon.textContent = '⏸️';
+        floatText.textContent = 'Pause Melody';
+        showToast("🎶 Playing sweet romantic ambient chimes...");
+
+        musicInterval = setInterval(() => {
+          const freq = melodyNotes[noteStep % melodyNotes.length];
+          playBellTone(freq, 2.0, 0.06);
+          if (noteStep % 6 === 0) {
+            playBellTone(freq / 2, 3.0, 0.04);
+          }
+          noteStep++;
+        }, 480);
+      } else {
+        btn.classList.remove('playing');
+        icon.textContent = '🎵';
+        floatIcon.textContent = '🎶';
+        floatText.textContent = 'Play Melody';
+        if (musicInterval) clearInterval(musicInterval);
+        showToast("Melody paused.");
+      }
+    }
+
+    document.getElementById('audioToggleBtn').addEventListener('click', toggleAudio);
+  </script>
 </body>
 </html>
